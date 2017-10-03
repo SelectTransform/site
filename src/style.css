@@ -1,0 +1,285 @@
+html {
+  padding-top: 100px;
+}
+.container hr {
+  border-bottom: 1px solid #202020;
+}
+hr {
+  margin: 40px 0;
+}
+/*
+.section {
+  padding: 10px 20px 0 20px;
+}
+*/
+input.email {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+}
+.btn.rectangle {
+  border-radius: 3px;
+}
+/*
+.row {
+  display: flex; 
+}
+.row.narrow {
+  max-width: 1000px;
+}
+.row .col2 {
+  flex: 1 1 50%;
+  margin: 10px;
+  border-radius: 3px;
+}
+.row .col3 {
+  flex: 1 1 33%;
+  margin: 10px;
+  border-radius: 3px;
+}
+*/
+#mailchimp {
+  max-width: 500px;
+  border-radius: 5px;
+  background: #f0f0f0;
+  padding: 20px 20px 10px;
+  margin: 0 auto;
+}
+.align-right{
+  text-align: right;
+}
+.logo {
+  text-align: center;
+}
+.logo img {
+  width: 300px;
+}
+a.badge {
+  display: none;
+}
+a.badge img {
+  width: 80px;
+}
+img.logo {
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin: 0 auto;
+}
+img.avatar {
+  width: 50px;
+}
+table {
+  margin: 20px 0;
+  table-layout: fixed;
+  width: 100%;
+}
+#twitter {
+  overflow: auto;
+}
+.header {
+  text-align: center;
+  padding: 20px;
+}
+#phd {
+  margin: 20px;
+}
+.pad30 {
+  padding: 30px;
+}
+blockquote {
+  margin: 30px 0 0;
+  padding: 0 15px;
+  color: white;
+  border-left: 3px solid rgba(255,255,255,0.8);
+  background: #232323;
+  font-family: Menlo, monaco;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+}
+body {
+  background: #191919;
+  color: white;
+  font-size: 14px;
+/*
+  text-align: center;
+  */
+  font-family: HelveticaNeue, helvetica, arial;
+  width: 100%;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+.btn {
+  padding: 5px 10px;
+  /*
+  text-transform: uppercase;
+  */
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 40px;
+  text-decoration: none;
+  margin: 5px;
+  display: inline-block;
+}
+.btn-primary {
+  border: 2px solid rgba(0,0,0,0.8);
+  color: white;
+  /*
+  background: rgba(0,0,0,0.8);
+  */
+}
+.btn-secondary {
+  border: 2px solid rgba(0,0,0,0.8);
+  color: rgba(0,0,0,0.8);
+}
+.dark {
+  color: rgba(255,255,255,0.4);
+}
+pre {
+  font-size: 14px;
+  line-height: 16px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: left;
+}
+pre code {
+  display: block;
+  padding: 20px !important;
+  font-size: 12px !important;
+}
+code {
+  border-radius: 2px;
+  padding: 0px 3px !important;
+  margin: 0 3px;
+}
+a.btn{
+  margin: 20px 10px 20px;
+}
+td {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px;
+  margin: 0;
+  border: none;
+  background: whitesmoke;
+}
+th {
+  padding: 10px;
+  margin: 0;
+  font-size: 14px;
+  border: 1px solid whitesmoke;
+}
+h1 {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+}
+img {
+  width: 100%
+}
+div.content {
+  background: white;
+  padding: 100px 10px;
+}
+p {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(255,255,255,0.8);
+  margin: 0 !important;
+}
+h2 a {
+  color: #bc9458;
+  text-decoration: underline;
+}
+h2 {
+  color: #bc9458;
+
+  font-family: 'Merriweather', serif;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 35px;
+  margin-top: 30px;
+}
+h3 {
+  color: white;
+  font-size: 30px;
+  margin: 0;
+}
+h3 a {
+  color: rgba(0,0,0,0.8);
+  text-decoration: underline;
+  padding: 20px 0;
+  display: inline-block;
+}
+a {
+  font-weight: bold;
+  color: #0366d6;
+}
+ol {
+  padding: 20px;
+}
+h4 {
+  color: white;
+}
+.mc-field-group {
+  margin: 10px 0;
+}
+.mc-field-group input {
+  border: none;
+  outline: none;
+}
+h5 {
+  font-family: Merriweather;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+h6 {
+  font-weight: bold;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+}
+li {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+/*
+li:before {
+  content: \\0BB \\020;
+}
+ul {
+  list-style: none;
+  -webkit-padding-start: 20px;
+}
+*/
+.center{
+  text-align: center;
+}
+.vid {
+  margin: 20px 0 0;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 35px;
+  height: 0;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.video-container iframe {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

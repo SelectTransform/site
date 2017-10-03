@@ -1,0 +1,657 @@
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/railscasts.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:900"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"><link rel="stylesheet" href="src/style.css"><script>window.addEventListener('load', function () {
+    hljs.configure({ languages: ["javascript"] });
+    hljs.initHighlighting();
+  });</script></head><body><div><h1 class="center">TRANSFORM</h1><div class="center"><a href="index.html" class="btn btn-primary">Home</a><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="" class="btn btn-primary">Examples</a></div><div class="container"><h1>Features</h1><div><h2 id="1-basic">1. Basic</h2>
+<p>Use <code>{{ }}</code> notation to fill out a template with data to generate a new JSON</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var template = {
+  "menu": {
+    "flavor": "{{flavor}}",
+    "richness": "{{richness}}",
+    "garlic amount": "{{garlic_amount}}",
+    "green onion?": "{{green_onion}}",
+    "sliced pork?": "{{pork_amount}}",
+    "secret sauce": "{{sauce_amount}}",
+    "noodle's texture": "{{texture}}"
+  }
+}
+
+var data = {
+  "flavor": "strong",
+  "richness": "ultra rich",
+  "garlic_amount": "1 clove",
+  "green_onion": "thin green onion",
+  "pork_amount": "with",
+  "sauce_amount": "double",
+  "texture": "extra firm"
+}
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  "menu": {
+    "flavor": "strong",
+    "richness": "ultra rich",
+    "garlic amount": "1 clove",
+    "green onion?": "thin green onion",
+    "sliced pork?": "with",
+    "secret sauce": "double",
+    "noodle's texture": "extra firm"
+  }
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="2-loop">2. Loop</h2>
+<p>Use <code>#each</code> to iterate through items</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var template = {
+  "orders": {
+    "{{#each customers}}": {
+      "order": "One {{menu}} for {{name}}!"
+    }
+  }
+}
+
+var data = {
+  "customers": [{
+    "name": "Hatter",
+    "menu": "miso ramen"
+  }, {
+    "name": "March Hare",
+    "menu": "tonkotsu ramen"
+  }, {
+    "name": "Dormouse",
+    "menu": "miso ramen"
+  }, {
+    "name": "Alice",
+    "menu": "cup noodles"
+  }]
+}
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  "orders": [{
+    "order": "One miso ramen for Hatter!"
+  }, {
+    "order": "One tonkotsu ramen for March Hare!"
+  }, {
+    "order": "One miso ramen for Dormouse!"
+  }, {
+    "order": "One cup noodles for Alice!"
+  }]
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="3-conditional">3. Conditional</h2>
+<p>Use <code>#if</code>/<code>#elseif</code>/<code>#else</code> to selectively fill out a template</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var template = {
+  "response": [{
+    "{{#if spicy &lt; 7}}": {
+      "message": "Coming right up!"
+    }
+  }, {
+    "{{#elseif spicy &lt; 9}}": {
+      "message": "Are you sure? It is very spicy"
+    }
+  }, {
+    "{{#else}}": {
+      "message": "Please sign here where it says you're responsible for this decision"
+    }
+  }]
+}
+
+var data = {
+  "spicy": 8
+}
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  "response": {
+    "message": "Are you sure? It is very spicy"
+  }
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="4-existential-operator">4. Existential Operator</h2>
+<p>You can use the existential operator <code>#?</code> to exclude an attribute altogether if the template evaluates to a falsy value.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var data = {
+  notifications: {
+    home: 1,
+    invite: 2
+  }
+};
+var template = {
+  tabs: [{
+    text: "home",
+    badge: "{{#? notifications.home}}"
+  }, {
+    text: "message",
+    badge: "{{#? notification.message}}"
+  }, {
+    text: "invite",
+    badge: "{{#? notification.invite}}"
+  }]
+}
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  tabs: [{
+    text: "home",
+    badge: 1
+  }, {
+    text: "message"
+  }, {
+    text: "invite",
+    badge: 2
+  }]
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="5-concat">5. Concat</h2>
+<p>You can concatenate multiple items and arrays into a single array using the <code>#concat</code> operator.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var data = {
+  numbers: [1,2,3]
+};
+var template = {
+  "items": {
+    "{{#concat}}": [
+      {
+        "type": "label",
+        "text": "Length: {{numbers.length}}"
+      },
+      {
+        "{{#each numbers}}": {
+          "type": "label",
+          "text": "{{this}}"
+        }
+      }
+    ]
+  }
+};
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  "items": [{
+    "type": "label",
+    "text": "Length: 3"
+  }, {
+    "type": "label",
+    "text": 1
+  }, {
+    "type": "label",
+    "text": 2
+  }, {
+    "type": "label",
+    "text": 3
+  }]
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="6-merge">6. Merge</h2>
+<p>You can merge multiple objects into a single object using the <code>#merge</code> operator. If there are any overlapping attributes, the ones that come later will override the previously set attribute.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var data = {
+  numbers: [1,2,3],
+  align: "right",
+  size: "14"
+};
+var template = {
+  "{{#merge}}": [
+    {
+      "type": "label",
+      "text": "Length: {{numbers.length}}"
+    },
+    {
+      "style": {
+        "align": "{{align}}",
+        "size": "{{size}}"
+      },
+      "action": {
+        "type": "$render"
+      }
+    }
+  ]
+};
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  "type": "label",
+  "text": "Length: 3",
+  "style": {
+    "align": "right",
+    "size": "14"
+  },
+  "action": {
+    "type": "$render"
+  }
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="7-inline-javascript">7. Inline JavaScript</h2>
+<p>You can use ANY native javascript expression inside the template.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var template = {
+  "ranking": {
+    "{{#each players.sort(function(p1, p2) { return p2.quantity - p1.quantity; }) }}": "{{name}} ate {{quantity}}"
+  },
+  "winner": "{{players.sort(function(p1, p2) { return p2.quantity - p1.quantity; })[0].name }}"
+};
+var data = {
+  "players": [{
+    "name": "Alice",
+    "quantity": 102
+  }, {
+    "name": "Mad Hatter",
+    "quantity": 108
+  }, {
+    "name": "Red Queen",
+    "quantity": 100
+  }]
+};
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+JSON.select(template)
+    .transform(data)
+    .root();
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+{
+  "ranking": [
+    "Mad Hatter ate 108",
+    "Alice ate 102",
+    "Red Queen ate 100"
+  ],
+  "winner": "Mad Hatter"
+}
+</code>
+</pre>
+</div>
+</div>
+
+</div></div><div class="container"><h1>Syntax</h1><div><p>There are 2 ways of transforming an object:</p>
+<h2 id="1-transform-">1. transform()</h2>
+<p>Select a template or its subtree, and transform data with the selected template.</p>
+<blockquote>
+<p>JSON.select(<code>TEMPLATE</code>).transform(<code>DATA</code>)</p>
+</blockquote>
+<pre><code>JSON.select({
+      "{{#each items}}": {
+        "type": "label",
+        "text": "{{name}}"
+      }
+    })
+    .transform({
+      items: [
+        { id: 1, name: "Ja" },
+        { id: 2, name: "Ka" },
+        { id: 3, name: "La" }
+      ]
+    })
+    .root();
+</code></pre><h2 id="2-transformwith-">2. transformWith()</h2>
+<p>Select a data object or its subtree and transform with a template. </p>
+<blockquote>
+<p>JSON.select(<code>DATA</code>).transformWith(<code>TEMPLATE</code>)</p>
+</blockquote>
+<pre><code>JSON.select({
+      items: [
+        { id: 1, name: "Ja" },
+        { id: 2, name: "Ka" },
+        { id: 3, name: "La" }
+      ]
+    })
+    .transformWith({
+      "{{#each items}}": {
+        "type": "label",
+        "text": "{{name}}"
+      }
+    })
+    .root();
+</code></pre></div></div><div class="container"><h1>Examples</h1><div><h2 id="1-use-only-a-subtree-of-a-template">1. Use only a subtree of a template</h2>
+<p>Sometimes you don't want to use the entire template to parse data. In this case you can <strong>select a subtree of a template</strong> and use that to parse data.</p>
+<p><br></p>
+<pre><code>var template = {
+  body: {
+    sections: [{
+      items: {
+        "{{#each items}}": {
+          type: "{{type}}",
+          url: "{{url}}"
+        }
+      }
+    }]
+  }
+};
+
+var finalTemplate = JSON.select(template, function(key, val) {
+                          return key === 'type';
+                        })
+                        .transform({ type: "image" }).root();
+
+/*
+finalTemplate = {
+  body: {
+    sections: [{
+      items: {
+        "{{#each items}}": {
+          type: "image",
+          url: "{{url}}"
+        }
+      }
+    }]
+  }
+}
+*/
+</code></pre><h2 id="2-filter-data-transform-with-template">2. Filter Data + Transform with template</h2>
+<p>Sometimes you have a large set of data but only want to transform a portion of it. In this case you can <strong>select a subtree of the data object</strong> and parse using a template.</p>
+<p><br></p>
+<pre><code>var data = {
+  "item": { "url": "http://localhost", "text": "localhost" },
+  "items": [
+    { "url": "file://documents", "text": "documents" },
+    { "url": "https://blahblah.com", "text": "blah"  }
+  ],
+  "nestedItems": {
+    "childItems": [{
+      "url": "http://hahaha.com",
+      "text": "haha"
+    }, {
+      "url": "https://hohoho.com",
+      "text": "hoho"
+    }]
+  }
+};
+
+var selection = JSON.select(data, function(key, val) {
+  return key === 'url';
+});
+
+var urls = selection.values();
+/**
+*  urls = [
+*    "http://localhost",
+*    "file://documents",
+*    "https://blahblah.com",
+*    "http://hahaha.com",
+*    "https://hohoho.com"
+*  ]
+*/
+
+var transformed = selection.transformWith({
+  "tag": "&lt;a href='{{url}}'&gt;{{text}}&lt;/a&gt;"
+})
+
+var objects = transformed.objects()
+/**
+* objects = [
+*   { "tag": "&lt;a href='http://localhost'&gt;localhost&lt;/a&gt;" },
+*   { "tag": "&lt;a href='file://documents'&gt;documents&lt;/a&gt;" },
+*   { "tag": "&lt;a href='https://blahblah.com'&gt;blah&lt;/a&gt;" },
+*   { "tag": "&lt;a href='https://hahaha.com'&gt;haha&lt;/a&gt;" },
+*   { "tag": "&lt;a href='https://hohoho.com'&gt;hoho&lt;/a&gt;" }
+* ]
+*/
+
+var values = transformed.values()
+/**
+* values = [
+*   "&lt;a href='http://localhost'&gt;localhost&lt;/a&gt;",
+*   "&lt;a href='file://documents'&gt;documents&lt;/a&gt;",
+*   "&lt;a href='https://blahblah.com'&gt;blah&lt;/a&gt;",
+*   "&lt;a href='https://hahaha.com'&gt;haha&lt;/a&gt;",
+*   "&lt;a href='https://hohoho.com'&gt;hoho&lt;/a&gt;"
+* ]
+*/
+
+var keys = transformed.keys()
+/**
+* keys = ["tag", "tag", "tag", "tag", "tag"]
+*/
+
+
+var root = transformed.root()
+/**
+* root = {
+*   "item": {
+*     "tag": "&lt;a href='http://localhost'&gt;localhost&lt;/a&gt;"
+*   },
+*   "items": [
+*     { "tag": "&lt;a href='file://documents'&gt;documents&lt;/a&gt;" },
+*     { "tag": "&lt;a href='https://blahblah.com'&gt;blah&lt;/a&gt;" },
+*   ],
+*   "nestedItems": {
+*     "childItems": [
+*       { "tag": "&lt;a href='https://hahaha.com'&gt;haha&lt;/a&gt;" },
+*       { "tag": "&lt;a href='https://hohoho.com'&gt;hoho&lt;/a&gt;" }
+*     ]
+*   }
+* };
+*/
+
+var transformed = JSON.select({
+  "{{#each items}}": {
+    tag: "&lt;a href='{{url}}'&gt;{{text}}&lt;/a&gt;"
+  }
+}).transform({ items: urls });
+
+var root = transformed.root();
+/*
+root = {
+  "item": { "tag": "&lt;a href='http://localhost'&gt;localhost&lt;/a&gt;" },
+  "items": [
+    { "tag": "&lt;a href='file://documents'&gt;documents&lt;/a&gt;" },
+    { "tag": "&lt;a href='https://blahblah.com'&gt;blah&lt;/a&gt;" }
+  ],
+  "nestedItems": {
+    "childItems": {
+      "tag": "&lt;a href='http://hahaha.com'&gt;haha&lt;/a&gt;"
+    },
+    "tag": "&lt;a href='https://hohoho.com'&gt;hoho&lt;/a&gt;"
+  }
+}
+*/
+
+var keys = transformed.keys();
+/*
+keys = ["tag", "tag", "tag", "tag", "tag"];
+*/
+
+var values = transformed.values();
+/*
+values = [
+  "&lt;a href='http://localhost'&gt;localhost&lt;/a&gt;",
+  "&lt;a href='file://documents'&gt;documents&lt;/a&gt;",
+  "&lt;a href='https://blahblah.com'&gt;blah&lt;/a&gt;",
+  "&lt;a href='http://hahaha.com'&gt;haha&lt;/a&gt;",
+  "&lt;a href='https://hohoho.com'&gt;hoho&lt;/a&gt;"
+]
+*/
+
+var objects = transformed.objects();
+/*
+objects = [
+  { "tag": "&lt;a href='http://localhost'&gt;localhost&lt;/a&gt;" },
+  { "tag": "&lt;a href='file://documents'&gt;documents&lt;/a&gt;" },
+  { "tag": "&lt;a href='https://blahblah.com'&gt;blah&lt;/a&gt;" },
+  { "tag": "&lt;a href='http://hahaha.com'&gt;haha&lt;/a&gt;" },
+  { "tag": "&lt;a href='https://hohoho.com'&gt;hoho&lt;/a&gt;" }
+]
+*/
+
+var paths = transformed.paths();
+</code></pre><h2 id="3-nesting-templates">3. Nesting Templates</h2>
+<p>Sometimes you may want to reuse a template by nesting inside another template. In this case you just need to select a subtree of the parent template and plug in a child template.</p>
+<p><br></p>
+<pre><code>var data = {
+  "item": { "url": "http://localhost" },
+  "items": [
+    { "url": "file://documents" },
+    { "url": "https://blahblah.com" }
+  ],
+  "nestedItems": {
+    "childItems": [{
+      "url": "http://hahaha.com",
+      "text": "haha"
+    }, {
+      "url": "https://hohoho.com",
+      "text": "hoho"
+    }]
+  }
+};
+var template = {
+  "items": {
+    "{{#each items}}": "{{partial}}"
+  }
+}
+var partial = {
+  "type": "label",
+  "text": "{{name}}"
+}
+var selected = JSON.select(template, function(key, val) {
+  return val === '{{partial}}';
+})
+var finalTemplate = selected.transform({
+  "partial": {
+    "type": "label",
+    "text": "{{name}}"
+  }
+}).root();
+
+/*
+  finalTemplate = {
+    "items": {
+      "{{#each items}}": {
+        "type": "label",
+        "text": "{{name}}"
+      }
+    }
+  }
+*/
+</code></pre></div></div></div></body></html>

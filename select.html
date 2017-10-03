@@ -1,0 +1,97 @@
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/railscasts.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:900"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"><link rel="stylesheet" href="src/style.css"><script>window.addEventListener('load', function () {
+    hljs.configure({ languages: ["javascript"] });
+    hljs.initHighlighting();
+  });</script></head><body><div><h1 class="center">SELECT</h1><div class="center"><a href="index.html" class="btn btn-primary">Home</a><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="" class="btn btn-primary">Examples</a></div><div class="container"><h1>Syntax</h1><div class="section"><p>ST extends the native <code>JSON</code> object for convenient usage.</p>
+<blockquote>
+<p>Syntax</p>
+</blockquote>
+<pre><code>JSON.select(data, selectorFunction)
+</code></pre><h2 id="parameters">Parameters</h2>
+<ul>
+<li><strong><code>data</code></strong> : Any JavaScript object</li>
+<li><strong><code>selectorFunction</code></strong> : selectorFunction is a predicate, to test each key/value pairs of the entire JSON tree. Return true to keep the element, false otherwise, taking two arguments:<ul>
+<li><strong><code>key</code></strong> : the "key" of the current key/value pair being tested</li>
+<li><strong><code>value</code></strong> : the "value" of the current key/value pair being tested</li>
+</ul>
+</li>
+</ul>
+<h2 id="return-value">Return Value</h2>
+<p>Returns a selection object which can be queried to retrieve the final result, using the following API:</p>
+<ul>
+<li><strong><code>values()</code></strong> : Array of values for all the key/value pair matches</li>
+<li><strong><code>keys()</code></strong> : Array of keys for all the key/value pair matches</li>
+<li><strong><code>paths()</code></strong> : Array of paths leading to all the key/value pair matches</li>
+<li><strong><code>objects()</code></strong> : Array of full objects in which the key/value match was found</li>
+<li><strong><code>root()</code></strong> : Retrieve the root node. Useful when used along with <a href="transform.html">transform</a></li>
+</ul>
+<hr>
+</div></div><div class="container"><h1>Example</h1><div class="section"><p>You can select any JSON tree to find only the subtrees that satisfy your needs.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Take any data</blockquote>
+<pre><code>
+var data = {
+  links: [
+    { "remote_url": "<a href="http://localhost">http://localhost</a>" },
+    { "file_url": "file://documents" },
+    { "remote_url": "<a href="https://blahblah.com">https://blahblah.com</a>" }
+  ],
+  preview: "<a href="https://image">https://image</a>",
+  metadata: "This is a link collection"
+};
+</code></pre>
+</div>
+<div class="col">
+<blockquote>2. Select subtree</blockquote>
+<pre><code>
+var selection = JSON.select(data, function(key, val) {
+  return /https?:/.test(val);
+})
+</code></pre>
+</div>
+<div class="col">
+<blockquote>3. Query the selection object</blockquote>
+<pre><code>
+var selected_values = selection.values();
+//  [
+//    "<a href="http://localhost">http://localhost</a>",
+//    "<a href="https://blahblah.com">https://blahblah.com</a>",
+//    "<a href="https://image">https://image</a>"
+//  ]
+
+var selected_keys = selection.keys();
+//  [
+//    "remote_url",
+//    "remote_url",
+//    "preview"
+//  ]
+
+var selected_objects = selection.objects();
+//  [
+//    { "remote_url": "<a href="http://localhost">http://localhost</a>" },
+//    { "remote_url": "<a href="https://blahblah.com">https://blahblah.com</a>" },
+//    {
+//      "links": [
+//        { "remote_url": "<a href="http://localhost">http://localhost</a>" },
+//        { "file_url": "file://documents" },
+//        { "remote_url": "<a href="https://blahblah.com">https://blahblah.com</a>" }
+//      ],
+//      "preview": "<a href="https://image">https://image</a>",
+//      "metadata": "This is a link collection"
+//    }
+//  ]
+//
+//
+
+var selected_paths = selection.paths();
+//  [
+//    "[\"links\"][0]",
+//    "[\"links\"][2]",
+//    ""
+//  ]
+</code></pre>
+</div>
+</div>
+
+<hr>
+</div></div></div></body></html>

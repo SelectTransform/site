@@ -1,0 +1,278 @@
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/railscasts.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:900"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"><link rel="stylesheet" href="src/style.css"><script>window.addEventListener('load', function () {
+    hljs.configure({ languages: ["javascript"] });
+    hljs.initHighlighting();
+  });</script></head><body><div><h1 class="center">ST</h1><div class="center"><div>Select &amp; Transform</div><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="editor.html" class="btn btn-primary">Demo</a><a href="" class="btn btn-primary">Examples</a></div><hr><img src="src/st.gif"><div class="container"><hr><h1>Features</h1><div class="row"><div class="col"><p><a href="select.html"></a></p><h2><a href="select.html">1. Select</a></h2><p></p>
+<h6 id="select-a-json-object-or-its-subtree-that-matches-your-filter-function">Select a JSON object or its subtree that matches your filter function</h6>
+<blockquote>
+<p>Step 1. Take any JSON object</p>
+</blockquote>
+<pre><code>var data = {
+  "links": [
+    { "remote_url": "http://localhost" },
+    { "file_url": "file://documents" },
+    { "remote_url": "https://blahblah.com" }
+  ],
+  "preview": "https://image",
+  "metadata": "This is a link collection"
+}
+</code></pre><blockquote>
+<p>Step 2. Find all key/value pairs that match a selector function</p>
+</blockquote>
+<pre><code>var sel = JSON.select(data, function(key, val) {
+  return /https?:/.test(val);
+})
+</code></pre><blockquote>
+<p>Step 3. Get the result</p>
+</blockquote>
+<pre><code>var keys = sel.keys();
+//  [
+//    "remote_url",
+//    "remote_url",
+//    "preview"
+//  ]
+
+var values = sel.values();
+//  [
+//    "http://localhost",
+//    "https://blahblah.com",
+//    "https://image"
+//  ]
+
+var paths = sel.paths();
+//  [
+//    "[\"links\"]",
+//    "[\"links\"]",
+//    ""
+//  ]
+</code></pre><p><a href="select.html" class="rectangle btn btn-primary">Learn more about Select</a></p>
+</div><div class="col"><p><a href="transform.html"></a></p><h2><a href="transform.html">2. Transform</a></h2><p></p>
+<h6 id="transform-any-json-with-a-declarative-template-also-in-json-">Transform any JSON with a declarative template, also in JSON.</h6>
+<blockquote>
+<p>Step 1. Take any JSON object</p>
+</blockquote>
+<pre><code>var data = {
+  "title": "List of websites",
+  "description": "This is a list of popular websites"
+  "data": {
+    "sites": [{
+      "name": "Google",
+      "url": "https://google.com"
+    }, {
+      "name": "Facebook",
+      "url": "https://facebook.com"
+    }, {
+      "name": "Twitter",
+      "url": "https://twitter.com"
+    }, {
+      "name": "Github",
+      "url": "https://github.com"
+    }]
+  }
+}
+</code></pre><blockquote>
+<p>Step 2. Select and transform with a template JSON object</p>
+</blockquote>
+<pre><code>var sel = JSON.select(data, function(key, val){
+            return key === 'sites';
+          })
+          .transformWith({
+            "items": {
+              "{{#each sites}}": {
+                "tag": "&lt;a href='{{url}}'&gt;{{name}}&lt;/a&gt;"
+              }
+            }
+          })
+</code></pre><blockquote>
+<p>Step 3. Get the result</p>
+</blockquote>
+<pre><code>var keys = sel.keys();
+//  [
+//    "tag",
+//    "tag",
+//    "tag",
+//    "tag"
+//  ]
+
+var values = sel.values();
+//  [
+//    "&lt;a href='https://google.com'&gt;Google&lt;/a&gt;",
+//    "&lt;a href='https://facebook.com'&gt;Facebook&lt;/a&gt;",
+//    "&lt;a href='https://twitter.com'&gt;Twitter&lt;/a&gt;",
+//    "&lt;a href='https://github.com'&gt;Github&lt;/a&gt;"
+//  ]
+
+var objects = sel.objects();
+//  [
+//    {
+//      "tag": "&lt;a href='https://google.com'&gt;Google&lt;/a&gt;"
+//    }, {
+//      "tag": "&lt;a href='https://facebook.com'&gt;Facebook&lt;/a&gt;"
+//    }, {
+//      "tag": "&lt;a href='https://twitter.com'&gt;Twitter&lt;/a&gt;"
+//    }, {
+//      "tag": "&lt;a href='https://github.com'&gt;Github&lt;/a&gt;"
+//    }
+//  ]
+
+var root = sel.root();
+//  {
+//    "items": [{
+//      "tag": "&lt;a href='https://google.com'&gt;Google&lt;/a&gt;"
+//    }, {
+//      "tag": "&lt;a href='https://facebook.com'&gt;Facebook&lt;/a&gt;"
+//    }, {
+//      "tag": "&lt;a href='https://twitter.com'&gt;Twitter&lt;/a&gt;"
+//    }, {
+//      "tag": "&lt;a href='https://github.com'&gt;Github&lt;/a&gt;"
+//    }]
+//  }
+</code></pre><p><a href="transform.html" class="rectangle btn btn-primary">Learn more about Transform</a></p>
+</div></div><hr><h1>What Can I Use It For?</h1><div>JSON powers almost everything in the world. Being able to manipulate any JSON at your will means you can do all kinds of things</div><h2>1. Declarative JSON API Template</h2><div>Build JSON using a simple, human-readable, and declarative template instead of manually coding.</div><br><div class="row"><div class="col"><blockquote>
+<p>Old way: Manually construct object</p>
+</blockquote>
+<pre><code>// app.js
+app.get('/', function (req, res) {
+  var response = {}
+  response["current_user"] = {
+    username: "@" + req.user.username,
+    firstname: req.user.name.split(' ')[0],
+    lastname: req.user.name.split(' ')[1]
+  }
+  var transformed_posts = db.posts.map(function(post){
+    return {
+      slug: post.slug
+      permalink: "https://blahblahblah.blahblah/" + post.slug,
+      post_title: post.title,
+      post_content: post.content
+    }
+  })
+  response["posts"] = transformed_posts
+  res.json(response)
+})
+</code></pre></div><div class="col"><blockquote>
+<p>New way: Declarative approach with st.js</p>
+</blockquote>
+<pre><code>// app.js
+app.get('/', function (req, res) {
+  res.json(JSON.select(require('./template.json'))
+               .transform({user: req.user, posts: db.posts})
+               .root())
+})
+
+// template.json
+{
+  "current_user": {
+    "username": "@{{user.username}}",
+    "firstname": "{{user.name.split(' ')[0]}}",
+    "lastname": "{{user.name.split(' ')[1]}}"
+  },
+  "posts": {
+    "{{#each posts}}": {
+      "slug": "{{slug}}",
+      "permalink": "https://blahblahblah.blahblah/{{slug}}",
+      "post_title": "{{title}}",
+      "post_content": "{{content}}"
+    }
+  }
+}
+</code></pre></div></div><h2>2. Parse JSON like never before</h2><div>Parse JSON anywhere, both frontend and the backend, as easy as using <code>JSON.stringify</code> or <code>JSON.parse</code></div><br><div class="row"><img class="col" src="src/st.gif"></div><h2>3. JSON as a JSON Query Language</h2><div>Make complex API queries purely written in JSON.</div><div>Since templates in ST are written in JSON, you can pass them around anywhere just like any other data object.</div><br><div class="row"><img class="col" src="src/jsonql.gif"></div><h2>4. JSON powered IPC/Microservices</h2><div>We don't have to stop at just transforming JSON.</div><br><div>Imagine what you can do when the leaf nodes are <b>executable functions</b>.</div><div>You can use ST to transform and resolve functions, and automatically trigger them!</div><br><div>Furthermore, you can bake validation, conditional, loop, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient.</div><br><div class="row"><div class="col"><blockquote>
+<p>Client</p>
+</blockquote>
+<pre><code>var IPC = require('./IPC')
+
+const addition = IPC({
+  name: "add",
+  args: [2,3,1]
+})
+// returns 6
+
+const subtraction = IPC({
+  name: "subtract",
+  args: [3,1]
+})
+// returns 2
+</code></pre></div><div class="col"><blockquote>
+<p>Server</p>
+</blockquote>
+<pre><code>// IPC.js
+// The user-facing interface.
+// Utilizes schema.json to resolve incoming payload
+// and then constructs and executes native
+// function calls from Functions.js
+module.exports = (payload) =&gt; {
+  const resolved = JSON.select(payload)
+             .transform(require('./schema.json'))
+             .root();
+  const Fun = require('./Functions');
+  return Fun[resolved].apply(this, payload.args);
+}
+
+// schema.json
+// Validates and resolves incoming JSON payload
+// into a static JSON object
+[{
+  "{{#if 'name' in this}}": [{
+    "{{#if name === 'add'}}": "add"
+  }, {
+    "{{#elseif name === 'subtract'}}": [{
+      "{{#if args.length === 2}}": "subtract"
+    }, {
+      "{{#else}}": "error"
+    }]
+  }, {
+    "{{#elseif name === 'sha256'}}": "sha256"
+  }, {
+    "{{#else}}": "error"
+  }]
+}, {
+  "{{#else}}": "error"
+}]
+
+// Functions.js
+// Actual native JS function definition
+module.exports = {
+  add() {
+    return Array.prototype.slice.call(arguments)
+                .reduce((a,b) =&gt; { return a+b; }, 0)
+  },
+  subtract() {
+    return arguments[0] - arguments[1]
+  },
+  sha256() {
+    const secret = 'abcdefg';
+    const crypto = require('crypto');
+    return crypto.createHmac('sha256', secret).update(arguments[0]).digest('hex')
+  },
+  error() {
+    return "Error"
+  }
+}
+</code></pre></div></div><h2>5. Build your OWN Turing complete JSON markup language!</h2><div><code>st.js</code> is the core JSON parser that powers <a href="https://www.jasonette.com">Jasonette</a>, a framework that lets you build native iOS/Android apps by writing nothing but a JSON markup.</div><br><div>But Jasonette is just one implementation of Turing complete JSON markup language.</div><br><div>With ST.js, anyone can design and build their own turing complete JSON markup language!</div><div>Interested? See example to learn more.</div><div class="vid"><div class="video-container"><iframe width="853" height="480" src="https://www.youtube.com/embed/hfevBAAfCMQ" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div></div><hr><h1>How to use</h1><div><h2 id="in-a-browser">In a browser</h2>
+<pre><code>&lt;script src="st.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var parsed = JSON.select({ "items": [1,2,3,4] })
+                .transformWith({
+                  "{{#each items}}": {
+                    "type": "label", "text": "{{this}}"
+                  }
+                })
+                .root();
+&lt;/script&gt;
+</code></pre><h2 id="in-node-js">In node.js</h2>
+<blockquote>
+<p>Install through npm:</p>
+</blockquote>
+<pre><code>$ npm install stjs
+</code></pre><blockquote>
+<p>Use</p>
+</blockquote>
+<pre><code>require('st');
+
+var parsed = JSON.select({ "items": [1,2,3,4] })
+                .transformWith({
+                  "{{#each items}}": {
+                    "type": "label", "text": "{{this}}"
+                  }
+                })
+                .root();
+</code></pre></div><hr><h1>Try Demo</h1><a href="editor.html" class="rectangle btn btn-primary">Demo</a><hr></div></div></body></html>
