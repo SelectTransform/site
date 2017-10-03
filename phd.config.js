@@ -110,7 +110,7 @@ module.exports = [{
       { $type: "h1", class: "center", $text: "SELECT" },
       {
         class: "center", $components: [
-          { $type: "a", href: "/", class: "btn btn-primary", $text: "Home" },
+          { $type: "a", href: "/site", class: "btn btn-primary", $text: "Home" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
           { $type: "a", href: "", class: "btn btn-primary", $text: "Examples" }
         ]
@@ -138,7 +138,7 @@ module.exports = [{
       { $type: "h1", class: "center", $text: "TRANSFORM" },
       {
         class: "center", $components: [
-          { $type: "a", href: "/", class: "btn btn-primary", $text: "Home" },
+          { $type: "a", href: "/site", class: "btn btn-primary", $text: "Home" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
           { $type: "a", href: "", class: "btn btn-primary", $text: "Examples" }
         ]
