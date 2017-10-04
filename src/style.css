@@ -116,6 +116,7 @@ body {
   box-sizing: border-box;
 }
 .btn {
+  font-family: "Helvetica Neue", helvetica, arial;
   padding: 5px 10px;
   /*
   text-transform: uppercase;
