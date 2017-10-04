@@ -18,7 +18,7 @@ module.exports = [{
       { $type: "h1", class: "center", $text: "ST" },
       {
         class: "center", $components: [
-          { $text: "Select & Transform" },
+          { $text: "Select Transform" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
           { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
         ]
@@ -111,6 +111,7 @@ module.exports = [{
           { $html: "This is because ST.js is a low level building block for creating a <b>Turing Complete JSON markup language</b>" },
           { $type: "br" },
           { $html: "<code>st.js</code> is the core JSON parser that powers <a href='https://www.jasonette.com'>Jasonette</a>, a framework that lets you build native iOS/Android apps by writing nothing but a JSON markup." },
+          { $type: "a", href: "https://www.jasonette.com", class: "btn btn-primary rectangle", $text: "Check out Jasonette" },
           { class: "vid", $components: [{
             class: "video-container", $components: [{
               $type: "iframe", width: "853", height: "480", src: "https://www.youtube.com/embed/hfevBAAfCMQ", frameborder: "0", allowfullscreen: "allowfullscreen"
@@ -124,9 +125,6 @@ module.exports = [{
           { $type: "hr" },
           { $type: "h1", $text: "How to use" },
           { $inherit: "md", $file: "src/markdown/index/usage.md" },
-          { $type: "hr" },
-          { $type: "h1", $text: "Try Demo" },
-          { $type: "a", href: "editor.html", class: "rectangle btn btn-primary", $text: "Demo" },
           { $type: "hr" },
         ]
       }
