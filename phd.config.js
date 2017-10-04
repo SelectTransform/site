@@ -19,6 +19,8 @@ module.exports = [{
       {
         class: "center", $components: [
           { $text: "Select Transform" },
+          { $type: "br" },
+          { $text: "bend JSON to your will", class: 'em' },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
           { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
         ]
@@ -39,9 +41,10 @@ module.exports = [{
           { $type: "hr" },
           { $type: "h1", $text: "What Can I Use It For?" },
           { $text: "JSON powers almost everything in the world." },
-          { $text: "Being able to manipulate any JSON at your will means you can do all kinds of magical things" },
+          { $text: "Being able to bend any JSON to your will means you can do all kinds of magical things" },
+          { $type: "hr" },
           { $type: "h2", $text: "1. Declarative JSON API Template" },
-          { $text: "Build JSON using a simple, human-readable, and declarative template instead of manually coding." },
+          { $text: "Build JSON using a simple, human-readable, and declarative template instead of manually coding it." },
           { $type: "a", href: "https://github.com/SelectTransform/api.template", class: "btn btn-primary rectangle", $text: "Visit Github" },
           { $type: "br" },
           { 
@@ -52,7 +55,7 @@ module.exports = [{
           },
           { $type: "hr" },
           { $type: "h2", $text: "2. Parse JSON like never before" },
-          { $html: "Parse JSON anywhere, both frontend and the backend, as easy as using <code>JSON.stringify</code> or <code>JSON.parse</code>" },
+          { $html: "Parse JSON anywhere, both frontend and backend, as easy as using <code>JSON.stringify</code> or <code>JSON.parse</code>" },
           { $type: "a", href: "https://github.com/SelectTransform/playground", class: "btn btn-primary rectangle", $text: "Visit Github" },
           { $type: "br" },
           { 
@@ -63,6 +66,7 @@ module.exports = [{
           { $type: "hr" },
           { $type: "h2", $text: "3. JSON as a JSON Query Language" },
           { $text: "Make complex API queries purely written in JSON." },
+          { $type: "br" },
           { $text: "Since templates in ST are written in JSON, you can pass them around anywhere just like any other data object." },
           { $text: "Notice we're not creating some new query language, it's just JSON. No convoluted infrastructure to set up!" },
           { $type: "a", href: "https://github.com/SelectTransform/JSONQL", class: "btn btn-primary rectangle", $text: "Visit Github" },
@@ -78,7 +82,7 @@ module.exports = [{
           { $html: "Templates are normally used for views" },
           { $html: "But the cool thing about JSON is it can be used to declaratively represent ANYTHING from Model to View to Controller." },
           { $type: "br" },
-          { $html: "What if we set <b>executable functions</b> as leaf nodes of an object, select&transform it, and then auto-trigger the resolved function?" },
+          { $html: "What if we set <b>executable functions</b> as leaf nodes of an object, select & transform it, and then auto-trigger the resolved function?" },
           { $text: "We have built a router in JSON!" },
           { $type: "br" },
           { $text: "Basically, the entire router logic is represented as a piece of data." },
@@ -104,9 +108,9 @@ module.exports = [{
           { $html: "We are looking at a server WITHOUT a router." },
           { $html: "Instead of implementing a router on the server, we send the router itself as part of a network request!" },
           { $type: "br" },
-          { $html: "This type of JSON powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints" },
+          { $html: "This type of JSON-powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints" },
           { $type: "br" },
-          { $text: "Also, remeber that you can bake validation, conditionals, loops, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient." },
+          { $html: "Also, remember that you can bake <a href='transform.html'>validation, conditionals, loops, etc.</a> all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient." },
           { $type: "hr" },
           { $type: "h2", $text: "6. Build your OWN Turing complete JSON markup language!" },
           { $text: "If you read this far, you may feel like you could implement practically any programming concept in a declarative manner, using JSON." },

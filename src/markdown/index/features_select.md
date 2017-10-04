@@ -24,7 +24,7 @@ var sel = JSON.select(data, function(key, val) {
 })
 ```
 
-> Step 3. Get the result
+> Step 3. Once selected, you can make queries.
 
 ```
 var keys = sel.keys();
