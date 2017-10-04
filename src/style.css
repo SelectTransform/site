@@ -40,6 +40,7 @@ input.email {
 */
 img.col {
   align-self: center;
+  padding: 0;
 }
 #mailchimp {
   max-width: 500px;
