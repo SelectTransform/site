@@ -1,6 +1,6 @@
 <a href="select.html"><h2>1. Select</h2></a>
 
-###### Select a JSON object or its subtree that matches your filter function
+Select a JSON object or its subtree that matches your filter function
 
 > Step 1. Take any JSON object
 

@@ -20,8 +20,7 @@ module.exports = [{
         class: "center", $components: [
           { $text: "Select & Transform" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
-          { $type: "a", href: "editor.html", class: "btn btn-primary", $text: "Demo" },
-          { $type: "a", href: "", class: "btn btn-primary", $text: "Examples" }
+          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
         ]
       },
       { $type: "hr" },
@@ -43,6 +42,7 @@ module.exports = [{
           { $text: "Being able to manipulate any JSON at your will means you can do all kinds of magical things" },
           { $type: "h2", $text: "1. Declarative JSON API Template" },
           { $text: "Build JSON using a simple, human-readable, and declarative template instead of manually coding." },
+          { $type: "a", href: "https://github.com/SelectTransform/api.template", class: "btn btn-primary rectangle", $text: "Visit Github" },
           { $type: "br" },
           { 
             class: "row", $components: [
@@ -53,6 +53,7 @@ module.exports = [{
           { $type: "hr" },
           { $type: "h2", $text: "2. Parse JSON like never before" },
           { $html: "Parse JSON anywhere, both frontend and the backend, as easy as using <code>JSON.stringify</code> or <code>JSON.parse</code>" },
+          { $type: "a", href: "https://github.com/SelectTransform/playground", class: "btn btn-primary rectangle", $text: "Visit Github" },
           { $type: "br" },
           { 
             class: "row", $components: [
@@ -64,6 +65,7 @@ module.exports = [{
           { $text: "Make complex API queries purely written in JSON." },
           { $text: "Since templates in ST are written in JSON, you can pass them around anywhere just like any other data object." },
           { $text: "Notice we're not creating some new query language, it's just JSON. No convoluted infrastructure to set up!" },
+          { $type: "a", href: "https://github.com/SelectTransform/JSONQL", class: "btn btn-primary rectangle", $text: "Visit Github" },
           { $type: "br" },
           { 
             class: "row", $components: [
@@ -72,12 +74,12 @@ module.exports = [{
             ]
           },
           { $type: "hr" },
-          { $type: "h2", $text: "4. Template Everything! Not just views." },
+          { $type: "h2", $text: "4. Template Everything, not just views!" },
           { $html: "Templates are normally used for views" },
-          { $html: "But the cool thing about JSON is it can be used to represent ANYTHING from Model to View to Controller in a declarative manner." },
+          { $html: "But the cool thing about JSON is it can be used to declaratively represent ANYTHING from Model to View to Controller." },
           { $type: "br" },
-          { $html: "Imagine what would happen if you set <b>executable functions</b> as leaf nodes of an object, select&transform it, and then trigger the resolved function." },
-          { $text: "You have implemented a JSON powered router!" },
+          { $html: "What if we set <b>executable functions</b> as leaf nodes of an object, select&transform it, and then auto-trigger the resolved function?" },
+          { $text: "We have implemented a JSON powered router!" },
           { $type: "br" },
           { 
             class: "row", $components: [
@@ -86,7 +88,8 @@ module.exports = [{
             ]
           },
           { $type: "hr" },
-          { $text: "Furthermore, the template is 100% portable since the template itself is written in JSON." },
+          { $type: "h2", $text: "5. Routerless Server" },
+          { $text: "The most important part is, even the templates themselves are written in JSON, and not some DSL. This makes it extremely portable and flexible." },
           { $html: "For example, we could take the same example from above and move <code>router.json</code> to the frontend." },
           { 
             class: "row", $components: [
@@ -103,7 +106,7 @@ module.exports = [{
           { $type: "br" },
           { $text: "Also, remeber that you can bake validation, conditionals, loops, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient." },
           { $type: "hr" },
-          { $type: "h2", $text: "5. Build your OWN Turing complete JSON markup language!" },
+          { $type: "h2", $text: "6. Build your OWN Turing complete JSON markup language!" },
           { $text: "If you read this far, you may feel like you could implement practically any programming concept in a declarative manner, using JSON." },
           { $html: "This is because ST.js is a low level building block for creating a <b>Turing Complete JSON markup language</b>" },
           { $type: "br" },
@@ -136,9 +139,9 @@ module.exports = [{
       { $type: "h1", class: "center", $text: "SELECT" },
       {
         class: "center", $components: [
-          { $type: "a", href: "/site", class: "btn btn-primary", $text: "Home" },
+          { $type: "a", href: "https://selecttransform.github.io/site", class: "btn btn-primary", $text: "Home" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
-          { $type: "a", href: "", class: "btn btn-primary", $text: "Examples" }
+          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
         ]
       },
       {
@@ -164,9 +167,9 @@ module.exports = [{
       { $type: "h1", class: "center", $text: "TRANSFORM" },
       {
         class: "center", $components: [
-          { $type: "a", href: "/site", class: "btn btn-primary", $text: "Home" },
+          { $type: "a", href: "https://selecttransform.github.io/site", class: "btn btn-primary", $text: "Home" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
-          { $type: "a", href: "", class: "btn btn-primary", $text: "Examples" }
+          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
         ]
       },
       {

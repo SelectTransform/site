@@ -1,6 +1,6 @@
 <a href="transform.html"><h2>2. Transform</h2></a>
 
-###### Transform any JSON with a declarative template, also in JSON.
+Transform any JSON with a declarative template, also in JSON.
 
 > Step 1. Take any JSON object
 

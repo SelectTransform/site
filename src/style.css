@@ -105,11 +105,12 @@ blockquote {
 body {
   background: #191919;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
 /*
   text-align: center;
-  */
   font-family: HelveticaNeue, helvetica, arial;
+  */
+  font-family: Menlo, monaco, Courier;
   width: 100%;
   margin: 10px auto;
   box-sizing: border-box;
