@@ -1,21 +1,6 @@
 > Server
 
 ```
-// router.json
-[{
-  "{{#if 'name' in this}}": [{
-    "{{#if name === 'add'}}": 'add_service'
-  }, {
-    "{{#elseif name === 'subtract'}}": [{
-      "{{#if args.length === 2}}": 'subtract_service'
-    }, {
-      "{{#else}}": 'error_service'
-    }]
-  }]
-}, {
-  "{{#else}}": 'error_service'
-}]
-
 // express server
 app.get('/',  (req, res) => {
   const Services = {
@@ -33,7 +18,7 @@ app.get('/',  (req, res) => {
       return 'error';
     }
   }
-  const service_name = JSON.transform(require('./router.json'), req.body);
+  const service_name = JSON.transform(req.body.router, req.body);
   res.json(Services[service_name].apply(this, req.body.args));
 });
 ```

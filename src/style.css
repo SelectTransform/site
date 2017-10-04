@@ -38,6 +38,9 @@ input.email {
   border-radius: 3px;
 }
 */
+img.col {
+  align-self: center;
+}
 #mailchimp {
   max-width: 500px;
   border-radius: 5px;
