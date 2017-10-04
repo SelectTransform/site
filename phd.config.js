@@ -85,7 +85,8 @@ module.exports = [{
               { class: "col", $inherit: "md", $file: "src/markdown/index/language_server.md" },
             ]
           },
-          { $text: "Furthermore, since the template itself is also written in JSON, it's completely portable." },
+          { $type: "hr" },
+          { $text: "Furthermore, the template is 100% portable since the template itself is written in JSON." },
           { $html: "For example, we could take the same example from above and move <code>router.json</code> to the frontend." },
           { 
             class: "row", $components: [
@@ -93,14 +94,18 @@ module.exports = [{
               { class: "col", $inherit: "md", $file: "src/markdown/index/portable_server.md" },
             ]
           },
-          { $html: "That's right! We are looking at a server WITHOUT a router. The router itself is transmitted as a network request!" },
+          { $html: "What's going on here?" },
+          { $type: "br" },
+          { $html: "We are looking at a server WITHOUT a router." },
+          { $html: "Instead we send the router itself as part of a network request!" },
+          { $type: "br" },
           { $html: "This type of JSON powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints" },
           { $type: "br" },
-          { $text: "Remeber that you can bake validation, conditionals, loops, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient." },
+          { $text: "Also, remeber that you can bake validation, conditionals, loops, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient." },
           { $type: "hr" },
           { $type: "h2", $text: "5. Build your OWN Turing complete JSON markup language!" },
           { $text: "If you read this far, you may feel like you could implement practically any programming concept in a declarative manner, using JSON." },
-          { $html: "This is because ST.js is a low level building block for building a <b>Turing Complete JSON markup language</b>" },
+          { $html: "This is because ST.js is a low level building block for creating a <b>Turing Complete JSON markup language</b>" },
           { $type: "br" },
           { $html: "<code>st.js</code> is the core JSON parser that powers <a href='https://www.jasonette.com'>Jasonette</a>, a framework that lets you build native iOS/Android apps by writing nothing but a JSON markup." },
           { class: "vid", $components: [{
@@ -110,7 +115,9 @@ module.exports = [{
           }]},
           { $type: "br" },
           { $text: "But Jasonette is just one implementation." },
-          { $text: "Want to build your own turing complete JSON markup language? See example to learn more." },
+          { $html: "Want to build your own turing complete JSON markup language?" },
+          { $type: "br" },
+          { $html: "Learn more about how Jasonette implements programming concepts by reading <a href='http://blog.jasonette.com/2017/02/15/functional-programming-in-json/'>this blog post</a>, and build your own using ST.js!" },
           { $type: "hr" },
           { $type: "h1", $text: "How to use" },
           { $inherit: "md", $file: "src/markdown/index/usage.md" },

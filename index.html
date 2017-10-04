@@ -178,19 +178,20 @@ app.get('/', function (req, res) {
 </code></pre></div></div><hr><h2>2. Parse JSON like never before</h2><div>Parse JSON anywhere, both frontend and the backend, as easy as using <code>JSON.stringify</code> or <code>JSON.parse</code></div><br><div class="row"><img class="col" src="src/st.gif"></div><hr><h2>3. JSON as a JSON Query Language</h2><div>Make complex API queries purely written in JSON.</div><div>Since templates in ST are written in JSON, you can pass them around anywhere just like any other data object.</div><div>Notice we're not creating some new query language, it's just JSON. No convoluted infrastructure to set up!</div><br><div class="row"><img class="col" src="src/jsonql1.png"><img class="col" src="src/jsonql2.png"></div><hr><h2>4. Template Everything! Not just views.</h2><div>Templates are normally used for views</div><div>But the cool thing about JSON is it can be used to represent ANYTHING from Model to View to Controller in a declarative manner.</div><br><div>Imagine what would happen if you set <b>executable functions</b> as leaf nodes of an object, select&amp;transform it, and then trigger the resolved function.</div><div>You have implemented a JSON powered router!</div><br><div class="row"><div class="col"><blockquote>
 <p>Client</p>
 </blockquote>
-<pre><code>var IPC = require('./IPC')
-
-const addition = IPC({
+<pre><code>var rpc = {
   name: "add",
   args: [2,3,1]
+}
+fetch("http://localhost:3000", {
+  method: "POST",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(rpc)
+).then(function(res) {
+  console.log(res.json());
 })
-// returns 6
-
-const subtraction = IPC({
-  name: "subtract",
-  args: [3,1]
-})
-// returns 2
 </code></pre></div><div class="col"><blockquote>
 <p>Server</p>
 </blockquote>
@@ -210,7 +211,7 @@ const subtraction = IPC({
 }]
 
 // express server
-app.get('/',  (req, res) =&gt; {
+app.post('/',  (req, res) =&gt; {
   const Services = {
     add_service: function(){
         return Array.prototype.slice
@@ -226,15 +227,13 @@ app.get('/',  (req, res) =&gt; {
       return 'error';
     }
   }
-  const service_name = JSON.transform(require('./router.json'), req.body);
-  res.json(Services[service_name].apply(this, req.body.args));
+  const name = JSON.transform(require('./router.json'), req.body);
+  res.json(Services[name].apply(this, req.body.args));
 });
-</code></pre></div></div><div>Furthermore, since the template itself is also written in JSON, it's completely portable.</div><div>For example, we could take the same example from above and move <code>router.json</code> to the frontend.</div><div class="row"><div class="col"><blockquote>
+</code></pre></div></div><hr><div>Furthermore, the template is 100% portable since the template itself is written in JSON.</div><div>For example, we could take the same example from above and move <code>router.json</code> to the frontend.</div><div class="row"><div class="col"><blockquote>
 <p>Client</p>
 </blockquote>
-<pre><code>var IPC = require('./IPC')
-
-const addition = IPC({
+<pre><code>var rpc = {
   name: "add",
   args: [2,3,1],
   router: [{
@@ -250,32 +249,22 @@ const addition = IPC({
   }, {
     "{{#else}}": 'error_service'
   }]
+}
+fetch("http://localhost:3000", {
+  method: "POST",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(rpc)
+).then(function(res) {
+  console.log(res.json());
 })
-// returns 6
-
-const subtraction = IPC({
-  name: "subtract",
-  args: [3,1],
-  router: [{
-    "{{#if 'name' in this}}": [{
-      "{{#if name === 'add'}}": 'add_service'
-    }, {
-      "{{#elseif name === 'subtract'}}": [{
-        "{{#if args.length === 2}}": 'subtract_service'
-      }, {
-        "{{#else}}": 'error_service'
-      }]
-    }]
-  }, {
-    "{{#else}}": 'error_service'
-  }]
-})
-// returns 2
 </code></pre></div><div class="col"><blockquote>
 <p>Server</p>
 </blockquote>
 <pre><code>// express server
-app.get('/',  (req, res) =&gt; {
+app.post('/',  (req, res) =&gt; {
   const Services = {
     add_service: function(){
         return Array.prototype.slice
@@ -291,10 +280,10 @@ app.get('/',  (req, res) =&gt; {
       return 'error';
     }
   }
-  const service_name = JSON.transform(req.body.router, req.body);
-  res.json(Services[service_name].apply(this, req.body.args));
+  const name = JSON.transform(req.body.router, req.body);
+  res.json(Services[name].apply(this, req.body.args));
 });
-</code></pre></div></div><div>That's right! We are looking at a server WITHOUT a router. The router itself is transmitted as a network request!</div><div>This type of JSON powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints</div><br><div>Remeber that you can bake validation, conditionals, loops, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient.</div><hr><h2>5. Build your OWN Turing complete JSON markup language!</h2><div>If you read this far, you may feel like you could implement practically any programming concept in a declarative manner, using JSON.</div><div>This is because ST.js is a low level building block for building a <b>Turing Complete JSON markup language</b></div><br><div><code>st.js</code> is the core JSON parser that powers <a href="https://www.jasonette.com">Jasonette</a>, a framework that lets you build native iOS/Android apps by writing nothing but a JSON markup.</div><div class="vid"><div class="video-container"><iframe width="853" height="480" src="https://www.youtube.com/embed/hfevBAAfCMQ" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div></div><br><div>But Jasonette is just one implementation.</div><div>Want to build your own turing complete JSON markup language? See example to learn more.</div><hr><h1>How to use</h1><div><h2 id="in-a-browser">In a browser</h2>
+</code></pre></div></div><div>What's going on here?</div><br><div>We are looking at a server WITHOUT a router.</div><div>Instead we send the router itself as part of a network request!</div><br><div>This type of JSON powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints</div><br><div>Also, remeber that you can bake validation, conditionals, loops, etc. all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient.</div><hr><h2>5. Build your OWN Turing complete JSON markup language!</h2><div>If you read this far, you may feel like you could implement practically any programming concept in a declarative manner, using JSON.</div><div>This is because ST.js is a low level building block for creating a <b>Turing Complete JSON markup language</b></div><br><div><code>st.js</code> is the core JSON parser that powers <a href="https://www.jasonette.com">Jasonette</a>, a framework that lets you build native iOS/Android apps by writing nothing but a JSON markup.</div><div class="vid"><div class="video-container"><iframe width="853" height="480" src="https://www.youtube.com/embed/hfevBAAfCMQ" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div></div><br><div>But Jasonette is just one implementation.</div><div>Want to build your own turing complete JSON markup language?</div><br><div>Learn more about how Jasonette implements programming concepts by reading <a href="http://blog.jasonette.com/2017/02/15/functional-programming-in-json/">this blog post</a>, and build your own using ST.js!</div><hr><h1>How to use</h1><div><h2 id="in-a-browser">In a browser</h2>
 <pre><code>&lt;script src="st.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 var parsed = JSON.select({ "items": [1,2,3,4] })

@@ -17,7 +17,7 @@
 }]
 
 // express server
-app.get('/',  (req, res) => {
+app.post('/',  (req, res) => {
   const Services = {
     add_service: function(){
         return Array.prototype.slice
@@ -33,7 +33,7 @@ app.get('/',  (req, res) => {
       return 'error';
     }
   }
-  const service_name = JSON.transform(require('./router.json'), req.body);
-  res.json(Services[service_name].apply(this, req.body.args));
+  const name = JSON.transform(require('./router.json'), req.body);
+  res.json(Services[name].apply(this, req.body.args));
 });
 ```
