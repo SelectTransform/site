@@ -1,4 +1,4 @@
-> Client
+> Browser
 
 ```
 var router = [{

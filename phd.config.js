@@ -74,12 +74,14 @@ module.exports = [{
             ]
           },
           { $type: "hr" },
-          { $type: "h2", $text: "4. Template Everything, not just views!" },
+          { $type: "h2", $text: "4. App as Data" },
           { $html: "Templates are normally used for views" },
           { $html: "But the cool thing about JSON is it can be used to declaratively represent ANYTHING from Model to View to Controller." },
           { $type: "br" },
           { $html: "What if we set <b>executable functions</b> as leaf nodes of an object, select&transform it, and then auto-trigger the resolved function?" },
-          { $text: "We have implemented a JSON powered router!" },
+          { $text: "We have built a router in JSON!" },
+          { $type: "br" },
+          { $text: "Basically, the entire router logic is represented as a piece of data." },
           { $type: "br" },
           { 
             class: "row", $components: [
@@ -89,8 +91,8 @@ module.exports = [{
           },
           { $type: "hr" },
           { $type: "h2", $text: "5. Routerless Server" },
-          { $text: "The most important part is, even the templates themselves are written in JSON, and not some DSL. This makes it extremely portable and flexible." },
-          { $html: "For example, we could take the same example from above and move <code>router.json</code> to the frontend." },
+          { $html: "Let's take the router example from right above. Since our router logic is just a JSON (<code>router.json</code>), we don't even need it on the server side." },
+          { $html: "What if we DON'T keep <code>router.json</code> on the server, but send it from the browser?" },
           { 
             class: "row", $components: [
               { class: "col", $inherit: "md", $file: "src/markdown/index/portable_client.md" },
@@ -100,7 +102,7 @@ module.exports = [{
           { $html: "What's going on here?" },
           { $type: "br" },
           { $html: "We are looking at a server WITHOUT a router." },
-          { $html: "Instead we send the router itself as part of a network request!" },
+          { $html: "Instead of implementing a router on the server, we send the router itself as part of a network request!" },
           { $type: "br" },
           { $html: "This type of JSON powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints" },
           { $type: "br" },
