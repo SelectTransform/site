@@ -74,8 +74,8 @@ module.exports = [{
           { $type: "br" },
           { 
             class: "row", $components: [
-              { $type: "img", class: "col", src: "src/jsonql1.png" },
-              { $type: "img", class: "col", src: "src/jsonql2.png" }
+              { $type: "img", class: "vertical", src: "src/jsonql1.png" },
+              { $type: "img", class: "vertical", src: "src/jsonql2.png" }
             ]
           },
           { $type: "hr" },
