@@ -40,6 +40,14 @@ module.exports = [{
             ]
           },
           { $type: "hr" },
+          { $type: "h1", $text: "How Does It Work?" },
+          { $type: "ol", $components: [
+            { $type: "li", $html: "<code>st.js</code> is a library that adds a couple of powerful methods to JavaScript's native JSON." },
+            { $type: "li", $html: "So you can simply use it with the syntax <code>JSON.select(...).transform(...)</code>" },
+            { $type: "li", $html: "The library is just a <a href='https://github.com/SelectTransform/st.js/blob/develop/st.js'>single file</a>, made up of <code>stateless functions</code>, with <code>NO dependency</code>." },
+            { $type: "li", $html: "Which makes it effortless to <code>embed anywhere</code> without hassle. (Currently used in various environments including iOS, Android, node.js, browser, etc.)" },
+          ]},
+          { $type: "hr" },
           { $type: "h1", $text: "What Can I Use It For?" },
           { $text: "JSON powers almost everything in the world." },
           { $text: "Being able to bend any JSON to your will means you can do all kinds of magical things" },
