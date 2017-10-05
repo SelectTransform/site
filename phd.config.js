@@ -22,7 +22,8 @@ module.exports = [{
           { $type: "br" },
           { $text: "bend JSON to your will", class: 'em' },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
-          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
+          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" },
+          { $type: "a", href: "https://twitter.com/selecttransform", class: "btn btn-primary", $text: "Twitter" }
         ]
       },
       { $type: "hr" },
@@ -145,7 +146,8 @@ module.exports = [{
         class: "center", $components: [
           { $type: "a", href: "https://selecttransform.github.io/site", class: "btn btn-primary", $text: "Home" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
-          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
+          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" },
+          { $type: "a", href: "https://twitter.com/selecttransform", class: "btn btn-primary", $text: "Twitter" }
         ]
       },
       {
@@ -173,7 +175,8 @@ module.exports = [{
         class: "center", $components: [
           { $type: "a", href: "https://selecttransform.github.io/site", class: "btn btn-primary", $text: "Home" },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
-          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" }
+          { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" },
+          { $type: "a", href: "https://twitter.com/selecttransform", class: "btn btn-primary", $text: "Twitter" }
         ]
       },
       {
