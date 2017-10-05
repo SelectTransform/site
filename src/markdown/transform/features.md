@@ -369,7 +369,53 @@ JSON.select(template)
 </div>
 </div>
 
-## 7. Inline JavaScript
+## 7. $root
+
+Sometimes you need to refer to the root data object while iterating through an `#each` loop.
+
+In this case you can use a special keyword named `$root`.
+
+<div class='row'>
+<div class='col'>
+<blockquote>1. Template and Data</blockquote>
+<pre>
+<code>
+var template = {
+  "{{#each posts}}": [
+    "{{content}}", "{{$root.users[user_id]}}"
+  ]
+}
+var data = {
+  users: ["Alice", "Bob", "Carol"],
+  posts: [{
+    content: "Show me the money",
+    user_id: 1
+  }, {
+    content: "hello world",
+    user_id: 0
+  }, {
+    content: "what is the meaning of life?",
+    user_id: 2
+  }]
+}
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>2. Transformed Result</blockquote>
+<pre>
+<code>
+[
+  ["Show me the money", "Bob"],
+  ["hello world", "Alice"],
+  ["what is the meaning of life?", "Carol"]
+]
+</code>
+</pre>
+</div>
+</div>
+
+## 8. Inline JavaScript
 
 You can use ANY native javascript expression inside the template.
 
