@@ -20,7 +20,7 @@ module.exports = [{
         class: "center", $components: [
           { $text: "Select Transform" },
           { $type: "br" },
-          { $text: "bend JSON to your will", class: 'em' },
+          { $text: "JSON Template over JSON", class: 'em' },
           { $type: "a", href: "https://github.com/SelectTransform/st.js", class: "btn btn-primary", $text: "Github" },
           { $type: "a", href: "https://selecttransform.github.io/playground/", class: "btn btn-primary", $text: "Try" },
           { $type: "a", href: "https://twitter.com/selecttransform", class: "btn btn-primary", $text: "Twitter" }
