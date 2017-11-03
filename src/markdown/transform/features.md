@@ -415,7 +415,76 @@ var data = {
 </div>
 </div>
 
-## 8. Inline JavaScript
+## 8. $index
+
+You can use a special variable named `$index` within `#each` loops.
+
+<div class='row'>
+<div class='col'>
+<blockquote>1. Template and Data</blockquote>
+<pre>
+<code>
+
+const template = {
+  "rows": {
+    "{{#each items}}": {
+      "row_number": "{{$index}}",
+      "columns": {
+        "{{#each this}}": {
+          "content": "{{this}}",
+          "column_number": "{{$index}}"
+        }
+      }
+    }
+  }
+};
+const data = {
+  "items": [
+    ['a,','b','c','d','e'],
+    [1,2,3,4,5]
+  ]
+};
+
+const result = ST.select(template)
+                 .transform(data)
+
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>2. Transformed Result</blockquote>
+<pre>
+<code>
+{
+  "rows": [
+    {
+      "row_number": 0,
+      "columns": [
+        { "content": "a,", "column_number": 0 },
+        { "content": "b", "column_number": 1 },
+        { "content": "c", "column_number": 2 },
+        { "content": "d", "column_number": 3 },
+        { "content": "e", "column_number": 4 }
+      ]
+    },
+    {
+      "row_number": 1,
+      "columns": [
+        { "content": 1, "column_number": 0 },
+        { "content": 2, "column_number": 1 },
+        { "content": 3, "column_number": 2 },
+        { "content": 4, "column_number": 3 },
+        { "content": 5, "column_number": 4 }
+      ]
+    }
+  ]
+}
+</code>
+</pre>
+</div>
+</div>
+
+## 9. Inline JavaScript
 
 You can use ANY native javascript expression inside the template.
 
