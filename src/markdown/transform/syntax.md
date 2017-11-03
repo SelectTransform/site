@@ -4,10 +4,10 @@ There are 2 ways of transforming an object:
 
 Select a template or its subtree, and transform data with the selected template.
 
-> JSON.select(`TEMPLATE`).transform(`DATA`)
+> ST.select(`TEMPLATE`).transform(`DATA`)
 
 ```
-JSON.select({
+ST.select({
       "{{#each items}}": {
         "type": "label",
         "text": "{{name}}"
@@ -27,10 +27,10 @@ JSON.select({
 
 Select a data object or its subtree and transform with a template. 
 
-> JSON.select(`DATA`).transformWith(`TEMPLATE`)
+> ST.select(`DATA`).transformWith(`TEMPLATE`)
 
 ```
-JSON.select({
+ST.select({
       items: [
         { id: 1, name: "Ja" },
         { id: 2, name: "Ka" },

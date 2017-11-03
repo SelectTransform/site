@@ -34,7 +34,7 @@ var data = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -94,7 +94,7 @@ var data = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -150,7 +150,7 @@ var data = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -199,7 +199,7 @@ var template = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -255,7 +255,7 @@ var template = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -318,7 +318,7 @@ var template = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -414,7 +414,7 @@ var data = {
 <div class="col">
 <blockquote>2. Select and Transform</blockquote>
 <pre><code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -440,9 +440,9 @@ JSON.select(template)
 <h2 id="1-transform-">1. transform()</h2>
 <p>Select a template or its subtree, and transform data with the selected template.</p>
 <blockquote>
-<p>JSON.select(<code>TEMPLATE</code>).transform(<code>DATA</code>)</p>
+<p>ST.select(<code>TEMPLATE</code>).transform(<code>DATA</code>)</p>
 </blockquote>
-<pre><code>JSON.select({
+<pre><code>ST.select({
       "{{#each items}}": {
         "type": "label",
         "text": "{{name}}"
@@ -459,9 +459,9 @@ JSON.select(template)
 </code></pre><h2 id="2-transformwith-">2. transformWith()</h2>
 <p>Select a data object or its subtree and transform with a template. </p>
 <blockquote>
-<p>JSON.select(<code>DATA</code>).transformWith(<code>TEMPLATE</code>)</p>
+<p>ST.select(<code>DATA</code>).transformWith(<code>TEMPLATE</code>)</p>
 </blockquote>
-<pre><code>JSON.select({
+<pre><code>ST.select({
       items: [
         { id: 1, name: "Ja" },
         { id: 2, name: "Ka" },
@@ -491,7 +491,7 @@ JSON.select(template)
   }
 };
 
-var finalTemplate = JSON.select(template, function(key, val) {
+var finalTemplate = ST.select(template, function(key, val) {
                           return key === 'type';
                         })
                         .transform({ type: "image" }).root();
@@ -530,7 +530,7 @@ finalTemplate = {
   }
 };
 
-var selection = JSON.select(data, function(key, val) {
+var selection = ST.select(data, function(key, val) {
   return key === 'url';
 });
 
@@ -596,7 +596,7 @@ var root = transformed.root()
 * };
 */
 
-var transformed = JSON.select({
+var transformed = ST.select({
   "{{#each items}}": {
     tag: "&lt;a href='{{url}}'&gt;{{text}}&lt;/a&gt;"
   }
@@ -675,7 +675,7 @@ var partial = {
   "type": "label",
   "text": "{{name}}"
 }
-var selected = JSON.select(template, function(key, val) {
+var selected = ST.select(template, function(key, val) {
   return val === '{{partial}}';
 })
 var finalTemplate = selected.transform({

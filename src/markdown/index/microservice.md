@@ -1,7 +1,7 @@
 ```
 // This is an Express.js app
 app.get('/', function (req, res) {
-  res.json(JSON.select(require('./jobs.json'))
+  res.json(ST.select(require('./jobs.json'))
                .transform({user: req.user, posts: db.posts})
                .root())
 })

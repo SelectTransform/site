@@ -18,7 +18,7 @@ var data = {
 <div class='col'>
 <blockquote>2. Select subtree</blockquote>
 <pre><code>
-var selection = JSON.select(data, function(key, val) {
+var selection = ST.select(data, function(key, val) {
   return /https?:/.test(val);
 })
 </code></pre>

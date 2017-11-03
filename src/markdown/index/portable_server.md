@@ -18,7 +18,7 @@ app.post('/',  (req, res) => {
       return 'error';
     }
   }
-  const name = JSON.transform(req.body.router, req.body);
+  const name = ST.transform(req.body.router, req.body);
   res.json(Services[name].apply(this, req.body.args));
 });
 ```

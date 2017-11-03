@@ -34,7 +34,7 @@ var data = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -99,7 +99,7 @@ var data = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -160,7 +160,7 @@ var data = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -214,7 +214,7 @@ var template = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -275,7 +275,7 @@ var template = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -343,7 +343,7 @@ var template = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>
@@ -449,7 +449,7 @@ var data = {
 <blockquote>2. Select and Transform</blockquote>
 <pre>
 <code>
-JSON.select(template)
+ST.select(template)
     .transform(data)
     .root();
 </code>

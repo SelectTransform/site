@@ -3,7 +3,7 @@
 ```
 <script src="st.js"></script>
 <script>
-var parsed = JSON.select({ "items": [1,2,3,4] })
+var parsed = ST.select({ "items": [1,2,3,4] })
                 .transformWith({
                   "{{#each items}}": {
                     "type": "label", "text": "{{this}}"
@@ -24,9 +24,9 @@ $ npm install stjs
 > Use
 
 ```
-require('st');
+const ST = require('st');
 
-var parsed = JSON.select({ "items": [1,2,3,4] })
+const parsed = ST.select({ "items": [1,2,3,4] })
                 .transformWith({
                   "{{#each items}}": {
                     "type": "label", "text": "{{this}}"

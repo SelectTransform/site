@@ -1,11 +1,10 @@
 <html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/railscasts.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:900"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"><link rel="stylesheet" href="src/style.css"><script>window.addEventListener('load', function () {
     hljs.configure({ languages: ["javascript"] });
     hljs.initHighlighting();
-  });</script></head><body><div><h1 class="center">SELECT</h1><div class="center"><a href="https://selecttransform.github.io/site" class="btn btn-primary">Home</a><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="https://selecttransform.github.io/playground/" class="btn btn-primary">Try</a><a href="https://twitter.com/selecttransform" class="btn btn-primary">Twitter</a></div><div class="container"><h1>Syntax</h1><div class="section"><p>ST extends the native <code>JSON</code> object for convenient usage.</p>
-<blockquote>
+  });</script></head><body><div><h1 class="center">SELECT</h1><div class="center"><a href="https://selecttransform.github.io/site" class="btn btn-primary">Home</a><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="https://selecttransform.github.io/playground/" class="btn btn-primary">Try</a><a href="https://twitter.com/selecttransform" class="btn btn-primary">Twitter</a></div><div class="container"><h1>Syntax</h1><div class="section"><blockquote>
 <p>Syntax</p>
 </blockquote>
-<pre><code>JSON.select(data, selectorFunction)
+<pre><code>ST.select(data, selectorFunction)
 </code></pre><h2 id="parameters">Parameters</h2>
 <ul>
 <li><strong><code>data</code></strong> : Any JavaScript object</li>
@@ -44,7 +43,7 @@ var data = {
 <div class="col">
 <blockquote>2. Select subtree</blockquote>
 <pre><code>
-var selection = JSON.select(data, function(key, val) {
+var selection = ST.select(data, function(key, val) {
   return /https?:/.test(val);
 })
 </code></pre>

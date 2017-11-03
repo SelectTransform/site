@@ -18,7 +18,7 @@ var template = {
   }
 };
 
-var finalTemplate = JSON.select(template, function(key, val) {
+var finalTemplate = ST.select(template, function(key, val) {
                           return key === 'type';
                         })
                         .transform({ type: "image" }).root();
@@ -64,7 +64,7 @@ var data = {
   }
 };
 
-var selection = JSON.select(data, function(key, val) {
+var selection = ST.select(data, function(key, val) {
   return key === 'url';
 });
 
@@ -130,7 +130,7 @@ var root = transformed.root()
 * };
 */
 
-var transformed = JSON.select({
+var transformed = ST.select({
   "{{#each items}}": {
     tag: "<a href='{{url}}'>{{text}}</a>"
   }
@@ -216,7 +216,7 @@ var partial = {
   "type": "label",
   "text": "{{name}}"
 }
-var selected = JSON.select(template, function(key, val) {
+var selected = ST.select(template, function(key, val) {
   return val === '{{partial}}';
 })
 var finalTemplate = selected.transform({

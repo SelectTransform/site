@@ -127,7 +127,7 @@ var root = sel.root();
 //    }]
 //  }
 </code></pre><p><a href="transform.html" class="rectangle btn btn-primary">Learn more about Transform</a></p>
-</div></div><hr><h1>How Does It Work?</h1><ol><li><code>st.js</code> is a library that adds a couple of powerful methods to JavaScript's native JSON.</li><li>So you can simply use it with the syntax <code>JSON.select(...).transform(...)</code></li><li>The library is just a <a href="https://github.com/SelectTransform/st.js/blob/develop/st.js">single file</a>, made up of <code>stateless functions</code>, with <code>NO dependency</code>.</li><li>Which makes it effortless to <code>embed anywhere</code> without hassle. (Currently used in various environments including iOS, Android, node.js, browser, etc.)</li></ol><hr><h1>What Can I Use It For?</h1><div>JSON powers almost everything in the world.</div><div>Being able to bend any JSON to your will means you can do all kinds of magical things</div><hr><h2>1. Declarative JSON API Template</h2><div>Build JSON using a simple, human-readable, and declarative template instead of manually coding it.</div><a href="https://github.com/SelectTransform/api.template" class="btn btn-primary rectangle">Visit Github</a><br><div class="row"><div class="col"><blockquote>
+</div></div><hr><h1>How Does It Work?</h1><ol><li><code>st.js</code> is a library that adds a couple of powerful methods to JavaScript's native JSON.</li><li>So you can simply use it with the syntax <code>ST.select(...).transform(...)</code></li><li>The library is just a <a href="https://github.com/SelectTransform/st.js/blob/develop/st.js">single file</a>, made up of <code>stateless functions</code>, with <code>NO dependency</code>.</li><li>Which makes it effortless to <code>embed anywhere</code> without hassle. (Currently used in various environments including iOS, Android, node.js, browser, etc.)</li></ol><hr><h1>What Can I Use It For?</h1><div>JSON powers almost everything in the world.</div><div>Being able to bend any JSON to your will means you can do all kinds of magical things</div><hr><h2>1. Declarative JSON API Template</h2><div>Build JSON using a simple, human-readable, and declarative template instead of manually coding it.</div><a href="https://github.com/SelectTransform/api.template" class="btn btn-primary rectangle">Visit Github</a><br><div class="row"><div class="col"><blockquote>
 <p>Old way: Manually construct object</p>
 </blockquote>
 <pre><code>// app.js
@@ -154,7 +154,7 @@ app.get('/', function (req, res) {
 </blockquote>
 <pre><code>// app.js
 app.get('/', function (req, res) {
-  res.json(JSON.select(require('./template.json'))
+  res.json(ST.select(require('./template.json'))
                .transform({user: req.user, posts: db.posts})
                .root())
 })
@@ -227,7 +227,7 @@ app.post('/',  (req, res) =&gt; {
       return 'error';
     }
   }
-  const name = JSON.transform(require('./router.json'), req.body);
+  const name = ST.transform(require('./router.json'), req.body);
   res.json(Services[name].apply(this, req.body.args));
 });
 </code></pre></div></div><hr><h2>5. Routerless Server</h2><div>Let's take the router example from right above. Since our router logic is just a JSON (<code>router.json</code>), we don't even need it on the server side.</div><div>What if we DON'T keep <code>router.json</code> on the server, but send it from the browser?</div><div class="row"><div class="col"><blockquote>
@@ -283,13 +283,13 @@ app.post('/',  (req, res) =&gt; {
       return 'error';
     }
   }
-  const name = JSON.transform(req.body.router, req.body);
+  const name = ST.transform(req.body.router, req.body);
   res.json(Services[name].apply(this, req.body.args));
 });
 </code></pre></div></div><div>What's going on here?</div><br><div>We are looking at a server WITHOUT a router.</div><div>Instead of implementing a router on the server, we send the router itself as part of a network request!</div><br><div>This type of JSON-powered portability provides extreme flexibility when creating interfaces for microservices and RPC endpoints</div><br><div>Also, remember that you can bake <a href="transform.html">validation, conditionals, loops, etc.</a> all in a single JSON IPC/RPC call, which makes it extremely powerful and efficient.</div><hr><h2>6. Build your OWN Turing complete JSON markup language!</h2><div>If you read this far, you may feel like you could implement practically any programming concept in a declarative manner, using JSON.</div><div>This is because ST.js is a low level building block for creating a <b>Turing Complete JSON markup language</b></div><br><div><code>st.js</code> is the core JSON parser that powers <a href="https://www.jasonette.com">Jasonette</a>, a framework that lets you build native iOS/Android apps by writing nothing but a JSON markup.</div><a href="https://www.jasonette.com" class="btn btn-primary rectangle">Check out Jasonette</a><div class="vid"><div class="video-container"><iframe width="853" height="480" src="https://www.youtube.com/embed/hfevBAAfCMQ" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div></div><br><div>But Jasonette is just one implementation.</div><div>Want to build your own turing complete JSON markup language?</div><br><div>Learn more about how Jasonette implements programming concepts by reading <a href="http://blog.jasonette.com/2017/02/15/functional-programming-in-json/">this blog post</a>, and build your own using ST.js!</div><hr><h1>How to use</h1><div><h2 id="in-a-browser">In a browser</h2>
 <pre><code>&lt;script src="st.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-var parsed = JSON.select({ "items": [1,2,3,4] })
+var parsed = ST.select({ "items": [1,2,3,4] })
                 .transformWith({
                   "{{#each items}}": {
                     "type": "label", "text": "{{this}}"
@@ -305,9 +305,9 @@ var parsed = JSON.select({ "items": [1,2,3,4] })
 </code></pre><blockquote>
 <p>Use</p>
 </blockquote>
-<pre><code>require('st');
+<pre><code>const ST = require('st');
 
-var parsed = JSON.select({ "items": [1,2,3,4] })
+const parsed = ST.select({ "items": [1,2,3,4] })
                 .transformWith({
                   "{{#each items}}": {
                     "type": "label", "text": "{{this}}"

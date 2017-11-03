@@ -3,7 +3,7 @@
 ```
 // app.js
 app.get('/', function (req, res) {
-  res.json(JSON.select(require('./template.json'))
+  res.json(ST.select(require('./template.json'))
                .transform({user: req.user, posts: db.posts})
                .root())
 })

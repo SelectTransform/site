@@ -33,7 +33,7 @@ app.post('/',  (req, res) => {
       return 'error';
     }
   }
-  const name = JSON.transform(require('./router.json'), req.body);
+  const name = ST.transform(require('./router.json'), req.body);
   res.json(Services[name].apply(this, req.body.args));
 });
 ```

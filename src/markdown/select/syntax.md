@@ -1,9 +1,8 @@
-ST extends the native `JSON` object for convenient usage.
 
 > Syntax
 
 ```
-JSON.select(data, selectorFunction)
+ST.select(data, selectorFunction)
 ```
 
 ## Parameters
