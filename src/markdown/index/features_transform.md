@@ -29,7 +29,7 @@ var data = {
 > Step 2. Select and transform with a template JSON object
 
 ```
-var sel = JSON.select(data, function(key, val){
+var sel = ST.select(data, function(key, val){
             return key === 'sites';
           })
           .transformWith({

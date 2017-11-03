@@ -19,7 +19,7 @@ var data = {
 > Step 2. Find all key/value pairs that match a selector function
 
 ```
-var sel = JSON.select(data, function(key, val) {
+var sel = ST.select(data, function(key, val) {
   return /https?:/.test(val);
 })
 ```

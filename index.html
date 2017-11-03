@@ -18,7 +18,7 @@
 </code></pre><blockquote>
 <p>Step 2. Find all key/value pairs that match a selector function</p>
 </blockquote>
-<pre><code>var sel = JSON.select(data, function(key, val) {
+<pre><code>var sel = ST.select(data, function(key, val) {
   return /https?:/.test(val);
 })
 </code></pre><blockquote>
@@ -72,7 +72,7 @@ var paths = sel.paths();
 </code></pre><blockquote>
 <p>Step 2. Select and transform with a template JSON object</p>
 </blockquote>
-<pre><code>var sel = JSON.select(data, function(key, val){
+<pre><code>var sel = ST.select(data, function(key, val){
             return key === 'sites';
           })
           .transformWith({
