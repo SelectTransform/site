@@ -190,8 +190,8 @@ module.exports = [{
       {
         class: "container",
         $components: [
-          { $type: "h1", $text: "Features" },
-          { $inherit: "md", $file: "src/markdown/transform/features.md" }
+          { $type: "h1", $text: "API" },
+          { $inherit: "md", $file: "src/markdown/transform/api.md" }
         ]
       },
       {

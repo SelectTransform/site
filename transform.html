@@ -1,7 +1,7 @@
 <html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/railscasts.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:900"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"><link rel="stylesheet" href="src/style.css"><script>window.addEventListener('load', function () {
     hljs.configure({ languages: ["javascript"] });
     hljs.initHighlighting();
-  });</script></head><body><div><h1 class="center">TRANSFORM</h1><div class="center"><a href="https://selecttransform.github.io/site" class="btn btn-primary">Home</a><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="https://selecttransform.github.io/playground/" class="btn btn-primary">Try</a><a href="https://twitter.com/selecttransform" class="btn btn-primary">Twitter</a></div><div class="container"><h1>Features</h1><div><h2 id="1-basic">1. Basic</h2>
+  });</script></head><body><div><h1 class="center">TRANSFORM</h1><div class="center"><a href="https://selecttransform.github.io/site" class="btn btn-primary">Home</a><a href="https://github.com/SelectTransform/st.js" class="btn btn-primary">Github</a><a href="https://selecttransform.github.io/playground/" class="btn btn-primary">Try</a><a href="https://twitter.com/selecttransform" class="btn btn-primary">Twitter</a></div><div class="container"><h1>API</h1><div><h2 id="1-basic">1. Basic</h2>
 <p>Use <code>{{ }}</code> notation to fill out a template with data to generate a new JSON</p>
 <div class="row">
 <div class="col">
@@ -343,113 +343,7 @@ ST.select(template)
 </div>
 </div>
 
-<h2 id="7-root">7. $root</h2>
-<p>Sometimes you need to refer to the root data object while iterating through an <code>#each</code> loop.</p>
-<p>In this case you can use a special keyword named <code>$root</code>.</p>
-<div class="row">
-<div class="col">
-<blockquote>1. Template and Data</blockquote>
-<pre><code>
-var template = {
-  "{{#each posts}}": [
-    "{{content}}", "{{$root.users[user_id]}}"
-  ]
-}
-var data = {
-  users: ["Alice", "Bob", "Carol"],
-  posts: [{
-    content: "Show me the money",
-    user_id: 1
-  }, {
-    content: "hello world",
-    user_id: 0
-  }, {
-    content: "what is the meaning of life?",
-    user_id: 2
-  }]
-}
-</code>
-</pre>
-</div>
-<div class="col">
-<blockquote>2. Transformed Result</blockquote>
-<pre><code>
-[
-  ["Show me the money", "Bob"],
-  ["hello world", "Alice"],
-  ["what is the meaning of life?", "Carol"]
-]
-</code>
-</pre>
-</div>
-</div>
-
-<h2 id="8-index">8. $index</h2>
-<p>You can use a special variable named <code>$index</code> within <code>#each</code> loops.</p>
-<div class="row">
-<div class="col">
-<blockquote>1. Template and Data</blockquote>
-<pre><code>
-
-const template = {
-  "rows": {
-    "{{#each items}}": {
-      "row_number": "{{$index}}",
-      "columns": {
-        "{{#each this}}": {
-          "content": "{{this}}",
-          "column_number": "{{$index}}"
-        }
-      }
-    }
-  }
-};
-const data = {
-  "items": [
-    ['a,','b','c','d','e'],
-    [1,2,3,4,5]
-  ]
-};
-
-const result = ST.select(template)
-                 .transform(data)
-
-</code>
-</pre>
-</div>
-<div class="col">
-<blockquote>2. Transformed Result</blockquote>
-<pre><code>
-{
-  "rows": [
-    {
-      "row_number": 0,
-      "columns": [
-        { "content": "a,", "column_number": 0 },
-        { "content": "b", "column_number": 1 },
-        { "content": "c", "column_number": 2 },
-        { "content": "d", "column_number": 3 },
-        { "content": "e", "column_number": 4 }
-      ]
-    },
-    {
-      "row_number": 1,
-      "columns": [
-        { "content": 1, "column_number": 0 },
-        { "content": 2, "column_number": 1 },
-        { "content": 3, "column_number": 2 },
-        { "content": 4, "column_number": 3 },
-        { "content": 5, "column_number": 4 }
-      ]
-    }
-  ]
-}
-</code>
-</pre>
-</div>
-</div>
-
-<h2 id="9-inline-javascript">9. Inline JavaScript</h2>
+<h2 id="7-inline-javascript">7. Inline JavaScript</h2>
 <p>You can use ANY native javascript expression inside the template.</p>
 <div class="row">
 <div class="col">
@@ -501,6 +395,227 @@ ST.select(template)
 </div>
 </div>
 
+<h2 id="8-root">8. $root</h2>
+<p>Sometimes you need to refer to the root data object while iterating through an <code>#each</code> loop.</p>
+<p>In this case you can use a special keyword named <code>$root</code>.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+var template = {
+  "{{#each posts}}": [
+    "{{content}}", "{{$root.users[user_id]}}"
+  ]
+}
+var data = {
+  users: ["Alice", "Bob", "Carol"],
+  posts: [{
+    content: "Show me the money",
+    user_id: 1
+  }, {
+    content: "hello world",
+    user_id: 0
+  }, {
+    content: "what is the meaning of life?",
+    user_id: 2
+  }]
+}
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Transformed Result</blockquote>
+<pre><code>
+[
+  ["Show me the money", "Bob"],
+  ["hello world", "Alice"],
+  ["what is the meaning of life?", "Carol"]
+]
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="9-index">9. $index</h2>
+<p>You can use a special variable named <code>$index</code> within <code>#each</code> loops.</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+
+const template = {
+  "rows": {
+    "{{#each items}}": {
+      "row_number": "{{$index}}",
+      "columns": {
+        "{{#each this}}": {
+          "content": "{{this}}",
+          "column_number": "{{$index}}"
+        }
+      }
+    }
+  }
+};
+const data = {
+  "items": [
+    ['a,','b','c','d','e'],
+    [1,2,3,4,5]
+  ]
+};
+
+const result = ST.select(template)
+                 .transform(data)
+                 .root()
+
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Transformed Result</blockquote>
+<pre><code>
+{
+  "rows": [
+    {
+      "row_number": 0,
+      "columns": [
+        { "content": "a,", "column_number": 0 },
+        { "content": "b", "column_number": 1 },
+        { "content": "c", "column_number": 2 },
+        { "content": "d", "column_number": 3 },
+        { "content": "e", "column_number": 4 }
+      ]
+    },
+    {
+      "row_number": 1,
+      "columns": [
+        { "content": 1, "column_number": 0 },
+        { "content": 2, "column_number": 1 },
+        { "content": 3, "column_number": 2 },
+        { "content": 4, "column_number": 3 },
+        { "content": 5, "column_number": 4 }
+      ]
+    }
+  ]
+}
+</code>
+</pre>
+</div>
+</div>
+
+<h2 id="10-local-variables">10. Local Variables</h2>
+<p>You can use <code>#let</code> API to declare local variables. The <code>#let</code> API takes an <strong>array</strong> as a paremeter, which has two elements:</p>
+<ol>
+<li><strong>The first parameter:</strong> the <code>{{#let}}</code> statement which assigns any value to a variable</li>
+<li><strong>The second parameter:</strong> the actual expression that will be evaluated</li>
+</ol>
+<p>Here's an example:</p>
+<div class="row">
+<div class="col">
+<blockquote>1. Template and Data</blockquote>
+<pre><code>
+
+const data = {
+  families: [{
+    location: "Wonderland",
+    members: [{
+      name: "Alice"
+    }, {
+      name: "Bob"
+    }]
+  }, {
+    location: "Springfield",
+    members: [{
+      name: "Bart"
+    }, {
+      name: "Marge"
+    }, {
+      name: "Lisa"
+    }, {
+      name: "Homer"
+    }, {
+      name: "Maggie"
+    }]
+  }]
+}
+const template = {
+  "rows": {
+    "{{#each families}}": {
+      "{{#let}}": [{
+        "family_location": "{{location}}"
+      }, {
+        "{{#each members}}": {
+          "type": "label",
+          "text": "{{name}} in {{family_location}}"
+        }
+      }]
+    }
+  }
+}
+
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>2. Select and Transform</blockquote>
+<pre><code>
+
+const result = ST.select(template)
+                 .transform(data)
+                 .root()
+
+</code>
+</pre>
+</div>
+<div class="col">
+<blockquote>3. Result</blockquote>
+<pre><code>
+
+{
+  "rows": [
+    [
+      {
+        "type": "label",
+        "text": "Alice in Wonderland"
+      },
+      {
+        "type": "label",
+        "text": "Bob in Wonderland"
+      }
+    ],
+    [
+      {
+        "type": "label",
+        "text": "Bart in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Marge in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Lisa in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Homer in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Maggie in Springfield"
+      }
+    ]
+  ]
+}
+
+</code>
+</pre>
+</div>
+</div>
+
+<p>The local variable feature is important when you are using nested loops. You could use the <code>$root</code> variable to reach out of the current loop context, but this has limitations, because you can always only reach out to the root level.</p>
+<p><br></p>
+<p>By using the <code>#let</code> API, you can define a variable at any level of a loop and have it accessible from anywhere further down the loop <strong>WITHOUT using the <code>$root</code> variable</strong>.</p>
+<hr>
 </div></div><div class="container"><h1>Syntax</h1><div><p>There are 2 ways of transforming an object:</p>
 <h2 id="1-transform-">1. transform()</h2>
 <p>Select a template or its subtree, and transform data with the selected template.</p>
@@ -540,7 +655,8 @@ ST.select(template)
       }
     })
     .root();
-</code></pre></div></div><div class="container"><h1>Examples</h1><div><h2 id="1-use-only-a-subtree-of-a-template">1. Use only a subtree of a template</h2>
+</code></pre><hr>
+</div></div><div class="container"><h1>Examples</h1><div><h2 id="1-use-only-a-subtree-of-a-template">1. Use only a subtree of a template</h2>
 <p>Sometimes you don't want to use the entire template to parse data. In this case you can <strong>select a subtree of a template</strong> and use that to parse data.</p>
 <p><br></p>
 <pre><code>var template = {
@@ -760,4 +876,5 @@ var finalTemplate = selected.transform({
     }
   }
 */
-</code></pre></div></div></div></body></html>
+</code></pre><hr>
+</div></div></div></body></html>
