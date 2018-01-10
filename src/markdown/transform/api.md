@@ -37,6 +37,9 @@ var data = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -102,6 +105,9 @@ var data = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -163,6 +169,9 @@ var data = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -217,6 +226,9 @@ var template = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -278,6 +290,9 @@ var template = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -346,6 +361,9 @@ var template = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -406,6 +424,9 @@ var data = {
 ST.select(template)
     .transform(data)
     .root();
+
+// or
+// ST.transform(template, data)
 </code>
 </pre>
 </div>
@@ -439,7 +460,8 @@ In this case you can use a special keyword named `$root`.
 <code>
 var template = {
   "{{#each posts}}": [
-    "{{content}}", "{{$root.users[user_id]}}"
+    "{{content}}",
+    "{{$root.users[user_id]}}"
   ]
 }
 var data = {
@@ -459,7 +481,20 @@ var data = {
 </pre>
 </div>
 <div class='col'>
-<blockquote>2. Transformed Result</blockquote>
+<blockquote>2. Select and Transform</blockquote>
+<pre>
+<code>
+ST.select(template)
+    .transform(data)
+    .root();
+
+// or
+// ST.transform(template, data)
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>3. Result</blockquote>
 <pre>
 <code>
 [
@@ -497,7 +532,7 @@ const template = {
 };
 const data = {
   "items": [
-    ['a,','b','c','d','e'],
+    ['a','b','c','d','e'],
     [1,2,3,4,5]
   ]
 };
@@ -506,11 +541,27 @@ const result = ST.select(template)
                  .transform(data)
                  .root()
 
+// or
+// const result = ST.transform(template, data)
+
 </code>
 </pre>
 </div>
 <div class='col'>
-<blockquote>2. Transformed Result</blockquote>
+<blockquote>2. Select and Transform</blockquote>
+<pre>
+<code>
+ST.select(template)
+    .transform(data)
+    .root();
+
+// or
+// ST.transform(template, data)
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>3. Result</blockquote>
 <pre>
 <code>
 {
@@ -518,21 +569,51 @@ const result = ST.select(template)
     {
       "row_number": 0,
       "columns": [
-        { "content": "a,", "column_number": 0 },
-        { "content": "b", "column_number": 1 },
-        { "content": "c", "column_number": 2 },
-        { "content": "d", "column_number": 3 },
-        { "content": "e", "column_number": 4 }
+        {
+          "content": "a",
+          "column_number": 0
+        },
+        {
+          "content": "b",
+          "column_number": 1
+        },
+        {
+          "content": "c",
+          "column_number": 2
+        },
+        {
+          "content": "d",
+          "column_number": 3
+        },
+        {
+          "content": "e",
+          "column_number": 4
+        }
       ]
     },
     {
       "row_number": 1,
       "columns": [
-        { "content": 1, "column_number": 0 },
-        { "content": 2, "column_number": 1 },
-        { "content": 3, "column_number": 2 },
-        { "content": 4, "column_number": 3 },
-        { "content": 5, "column_number": 4 }
+        {
+          "content": 1,
+          "column_number": 0
+        },
+        {
+          "content": 2,
+          "column_number": 1
+        },
+        {
+          "content": 3,
+          "column_number": 2
+        },
+        {
+          "content": 4,
+          "column_number": 3
+        },
+        {
+          "content": 5,
+          "column_number": 4
+        }
       ]
     }
   ]
@@ -606,6 +687,9 @@ const template = {
 const result = ST.select(template)
                  .transform(data)
                  .root()
+
+// or
+// const result = ST.transform(template, data)
 
 </code>
 </pre>
