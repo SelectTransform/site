@@ -369,53 +369,7 @@ ST.select(template)
 </div>
 </div>
 
-## 7. $root
-
-Sometimes you need to refer to the root data object while iterating through an `#each` loop.
-
-In this case you can use a special keyword named `$root`.
-
-<div class='row'>
-<div class='col'>
-<blockquote>1. Template and Data</blockquote>
-<pre>
-<code>
-var template = {
-  "{{#each posts}}": [
-    "{{content}}", "{{$root.users[user_id]}}"
-  ]
-}
-var data = {
-  users: ["Alice", "Bob", "Carol"],
-  posts: [{
-    content: "Show me the money",
-    user_id: 1
-  }, {
-    content: "hello world",
-    user_id: 0
-  }, {
-    content: "what is the meaning of life?",
-    user_id: 2
-  }]
-}
-</code>
-</pre>
-</div>
-<div class='col'>
-<blockquote>2. Transformed Result</blockquote>
-<pre>
-<code>
-[
-  ["Show me the money", "Bob"],
-  ["hello world", "Alice"],
-  ["what is the meaning of life?", "Carol"]
-]
-</code>
-</pre>
-</div>
-</div>
-
-## 8. Inline JavaScript
+## 7. Inline JavaScript
 
 You can use ANY native javascript expression inside the template.
 
@@ -472,3 +426,241 @@ ST.select(template)
 </div>
 </div>
 
+## 8. $root
+
+Sometimes you need to refer to the root data object while iterating through an `#each` loop.
+
+In this case you can use a special keyword named `$root`.
+
+<div class='row'>
+<div class='col'>
+<blockquote>1. Template and Data</blockquote>
+<pre>
+<code>
+var template = {
+  "{{#each posts}}": [
+    "{{content}}", "{{$root.users[user_id]}}"
+  ]
+}
+var data = {
+  users: ["Alice", "Bob", "Carol"],
+  posts: [{
+    content: "Show me the money",
+    user_id: 1
+  }, {
+    content: "hello world",
+    user_id: 0
+  }, {
+    content: "what is the meaning of life?",
+    user_id: 2
+  }]
+}
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>2. Transformed Result</blockquote>
+<pre>
+<code>
+[
+  ["Show me the money", "Bob"],
+  ["hello world", "Alice"],
+  ["what is the meaning of life?", "Carol"]
+]
+</code>
+</pre>
+</div>
+</div>
+
+## 9. $index
+
+You can use a special variable named `$index` within `#each` loops.
+
+<div class='row'>
+<div class='col'>
+<blockquote>1. Template and Data</blockquote>
+<pre>
+<code>
+
+const template = {
+  "rows": {
+    "{{#each items}}": {
+      "row_number": "{{$index}}",
+      "columns": {
+        "{{#each this}}": {
+          "content": "{{this}}",
+          "column_number": "{{$index}}"
+        }
+      }
+    }
+  }
+};
+const data = {
+  "items": [
+    ['a,','b','c','d','e'],
+    [1,2,3,4,5]
+  ]
+};
+
+const result = ST.select(template)
+                 .transform(data)
+                 .root()
+
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>2. Transformed Result</blockquote>
+<pre>
+<code>
+{
+  "rows": [
+    {
+      "row_number": 0,
+      "columns": [
+        { "content": "a,", "column_number": 0 },
+        { "content": "b", "column_number": 1 },
+        { "content": "c", "column_number": 2 },
+        { "content": "d", "column_number": 3 },
+        { "content": "e", "column_number": 4 }
+      ]
+    },
+    {
+      "row_number": 1,
+      "columns": [
+        { "content": 1, "column_number": 0 },
+        { "content": 2, "column_number": 1 },
+        { "content": 3, "column_number": 2 },
+        { "content": 4, "column_number": 3 },
+        { "content": 5, "column_number": 4 }
+      ]
+    }
+  ]
+}
+</code>
+</pre>
+</div>
+</div>
+
+## 10. Local Variables
+
+You can use `#let` API to declare local variables. The `#let` API takes an **array** as a paremeter, which has two elements:
+
+1. **The first parameter:** the `{{#let}}` statement which assigns any value to a variable
+2. **The second parameter:** the actual expression that will be evaluated
+
+Here's an example:
+
+<div class='row'>
+<div class='col'>
+<blockquote>1. Template and Data</blockquote>
+<pre>
+<code>
+
+const data = {
+  families: [{
+    location: "Wonderland",
+    members: [{
+      name: "Alice"
+    }, {
+      name: "Bob"
+    }]
+  }, {
+    location: "Springfield",
+    members: [{
+      name: "Bart"
+    }, {
+      name: "Marge"
+    }, {
+      name: "Lisa"
+    }, {
+      name: "Homer"
+    }, {
+      name: "Maggie"
+    }]
+  }]
+}
+const template = {
+  "rows": {
+    "{{#each families}}": {
+      "{{#let}}": [{
+        "family_location": "{{location}}"
+      }, {
+        "{{#each members}}": {
+          "type": "label",
+          "text": "{{name}} in {{family_location}}"
+        }
+      }]
+    }
+  }
+}
+
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>2. Select and Transform</blockquote>
+<pre>
+<code>
+
+const result = ST.select(template)
+                 .transform(data)
+                 .root()
+
+</code>
+</pre>
+</div>
+<div class='col'>
+<blockquote>3. Result</blockquote>
+<pre>
+<code>
+
+{
+  "rows": [
+    [
+      {
+        "type": "label",
+        "text": "Alice in Wonderland"
+      },
+      {
+        "type": "label",
+        "text": "Bob in Wonderland"
+      }
+    ],
+    [
+      {
+        "type": "label",
+        "text": "Bart in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Marge in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Lisa in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Homer in Springfield"
+      },
+      {
+        "type": "label",
+        "text": "Maggie in Springfield"
+      }
+    ]
+  ]
+}
+
+</code>
+</pre>
+</div>
+</div>
+
+The local variable feature is important when you are using nested loops. You could use the `$root` variable to reach out of the current loop context, but this has limitations, because you can always only reach out to the root level.
+
+<br>
+
+By using the `#let` API, you can define a variable at any level of a loop and have it accessible from anywhere further down the loop **WITHOUT using the `$root` variable**.
+
+---
